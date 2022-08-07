@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Pixellari";
+  src: url("/fonts/Pixellari.ttf");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@layer base {
+  html {
+    font-family: Pixellari, system-ui, sans-serif;
+  }
+  ,
+  body {
+    @apply dark:bg-blue;
+  }
+}
