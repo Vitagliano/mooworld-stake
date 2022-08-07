@@ -1,6 +1,6 @@
 export const CHAIN_ID = 4002;
 export const StakingContract_Address =
-  "0x87eb3e1C9f1d68AF861a7A3aA96dC1Bb13BD9934";
+  "0x2359fbB80d8DcEF5d62d9cC3bb31E7297a58eb2e";
 export const StakingContract_Address_NFT =
   "0x46b933f2B508A9a564eb77731363eD74f61FC409";
 export const SMARTCONTRACT_ADDRESS_ERC20 =
@@ -926,62 +926,6 @@ export const StakingContract_ABI = [
       },
     ],
     name: "cancelStake",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "staker",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "token",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "tokenId",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "releaseTime",
-            type: "uint256",
-          },
-          {
-            internalType: "enum StakeNFT.StakingStatus",
-            name: "status",
-            type: "uint8",
-          },
-          {
-            internalType: "uint256",
-            name: "StakingId",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct StakeNFT.Staking",
-        name: "",
-        type: "tuple",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "stakingId",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "staker",
-        type: "address",
-      },
-    ],
-    name: "checkStake",
     outputs: [
       {
         components: [

@@ -62,15 +62,11 @@ export default function Home() {
           signer
         );
 
-        console.log("contract", contract);
-
         contract_nft = new ethers.Contract(
           StakingContract_Address_NFT,
           SMARCONTRACT_INI_ABI,
           signer
         );
-
-        console.log("contract_nft", contract_nft);
 
         contract_20 = new ethers.Contract(
           SMARTCONTRACT_ADDRESS_ERC20,
@@ -78,11 +74,10 @@ export default function Home() {
           signer
         );
 
-        console.log("contract_20", contract_20);
-
-        setDailyRewardRate(
-          (await contract.getRewardRate()) / Math.pow(10, 18) / 25
-        );
+        setDailyRewardRate((await contract.getRewardRate()) * 0.9);
+        // setDailyRewardRate(
+        //   (await contract.getRewardRate()) / Math.pow(10, 18) / 25
+        // );
 
         /////////////////
         updatePage(address);
@@ -124,21 +119,30 @@ export default function Home() {
       }
       const data = await Promise.all(promise);
       const now = new Date().getTime() / 1000;
-      const rate =
-        parseFloat(await contract.getRewardRate()) / Math.pow(10, 18);
+      const rate = parseFloat(await contract.getRewardRate()) * 0.9;
+      // const rate =
+      //   parseFloat(await contract.getRewardRate()) / Math.pow(10, 18);
 
       for (let i = 0; i < data.length; i++) {
         if (data[i].status === 1) {
-          // console.log(i, "pool ID--------------------------");
-        }
-        if (data[i].status === 0) {
           total++;
           if (data[i].staker.toLowerCase() === address.toLowerCase()) {
-            console.log(rate);
             staked.push({
               id: i,
               tokenId: data[i].tokenId.toNumber(),
               status: data[i].status,
+              stakingId: data[i].StakingId.toNumber(),
+            });
+          }
+        }
+        if (data[i].status === 0) {
+          total++;
+          if (data[i].staker.toLowerCase() === address.toLowerCase()) {
+            staked.push({
+              id: i,
+              tokenId: data[i].tokenId.toNumber(),
+              status: data[i].status,
+              stakingId: data[i].StakingId.toNumber(),
             });
           }
         }
@@ -279,8 +283,7 @@ export default function Home() {
             <p className="reward-rate">
               daily reward rate:{" "}
               <span>
-                {dailyRewardRate === 0 ? "--" : dailyRewardRate}
-                MILK
+                {dailyRewardRate === 0 ? "-- " : dailyRewardRate} MILK
               </span>
             </p>
           </Container>
@@ -326,6 +329,7 @@ export default function Home() {
                               <NFTCard
                                 id={item.id}
                                 key={key}
+                                status={item.status}
                                 tokenId={item.tokenId}
                                 signerAddress={signerAddress}
                                 updatePage={() => updatePage(signerAddress)}
@@ -385,6 +389,8 @@ export default function Home() {
                               <UnNFTCard
                                 key={key}
                                 id={item.id}
+                                status={item.status}
+                                stakingId={item.stakingId}
                                 tokenId={item.tokenId}
                                 signerAddress={signerAddress}
                                 updatePage={() => updatePage(signerAddress)}

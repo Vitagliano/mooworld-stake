@@ -316,7 +316,7 @@ contract StakeNFT {
         
         uint currentStakingId = _stakingId;
 
-        Staking memory staking = Staking(msg.sender,token, tokenId, releaseTime, StakingStatus.Active, currentStakingId);
+        Staking memory staking = Staking(msg.sender,token, tokenId, releaseTime, StakingStatus.Claimable, currentStakingId);
         
 
         _StakedItem[_stakingId] = staking;
@@ -333,25 +333,25 @@ contract StakeNFT {
     }
 
     //function to check NFT stake duration status 
-    function checkStake(uint stakingId, address staker)public returns (Staking memory) {
-        Staking storage staking = _StakedItem[stakingId];
+    // function checkStake(uint stakingId, address staker)public returns (Staking memory) {
+    //     Staking storage staking = _StakedItem[stakingId];
         
-        require(staker == msg.sender,"You cannot check this staking as it is not listed under this address");
-        require(staking.status == StakingStatus.Active,"Staking is not active or claimed");
-        if (block.timestamp >= staking.releaseTime) {
-            staking.status = StakingStatus.Claimable;
-        }
+    //     require(staker == msg.sender,"You cannot check this staking as it is not listed under this address");
+    //     require(staking.status == StakingStatus.Active,"Staking is not active or claimed");
+    //     if (block.timestamp >= staking.releaseTime) {
+    //         staking.status = StakingStatus.Claimable;
+    //     }
 
-        emit tokenClaimStatus(staking.token, staking.tokenId, staking.status, staking.StakingId);
-        return _StakedItem[stakingId];
+    //     emit tokenClaimStatus(staking.token, staking.tokenId, staking.status, staking.StakingId);
+    //     return _StakedItem[stakingId];
 
  
-    }
+    // }
 
     //function to claim reward token if NFT stake duration is completed
     function claimStake(uint stakingId) public returns(Staking memory){
         Staking storage staking = _StakedItem[stakingId];
-        
+        require(block.timestamp >= staking.releaseTime, "Has not passed 5 minutes");
         require(staking.staker == msg.sender,"You cannot cancel this staking as it is not listed under this address");
         require(staking.status == StakingStatus.Claimable,"Your reward is either not claimable yet or has been claimed");
 
