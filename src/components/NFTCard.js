@@ -5,7 +5,6 @@ import {
 } from "../../config";
 import { ScaleLoader } from "react-spinners";
 import { successAlert } from "./toastGroup";
-import { Button, Grid } from "@mui/material";
 import { PageLoading } from "./Loading";
 
 export default function NFTCard({
