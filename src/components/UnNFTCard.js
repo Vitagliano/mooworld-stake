@@ -84,32 +84,51 @@ export default function UnNFTCard({
     // eslint-disable-next-line
   }, []);
   return (
-    <div className="nft-card">
-      <div className="reward">
-        <p>{stakingId}</p>
-        <p>Reward:</p>
-        <span>{parseFloat(reward).toLocaleString()} MILK</span>
-      </div>
-      {loading && (
-        <div className="card-loading">
-          <PageLoading />
+    <div className="w-full">
+      <div className="relative group">
+        <div className="absolute bottom-0 p-2 text-white ">
+          <p>Moo #{tokenId}</p>
+          <p>Reward:</p>
+          <span>{parseFloat(reward).toLocaleString()} MILK</span>
         </div>
-      )}
-      <div className="media">
-        {image === "" ? (
-          <span className="empty-image empty-image-skeleton"></span>
-        ) : (
-          // eslint-disable-next-line
-          <img src={image} alt="" style={{ opacity: loading ? 0 : 1 }} />
+        {loading && (
+          <div className="card-loading">
+            <PageLoading />
+          </div>
         )}
-      </div>
-      <div className={loading ? "card-action is-loading" : "card-action"}>
-        <button className="btn-primary" onClick={onUnStake}>
-          UNSTAKE
-        </button>
-        <button className="btn-primary" onClick={onClaim}>
-          CLAIM
-        </button>
+        <div className="media">
+          {image === "" ? (
+            <span className="empty-image empty-image-skeleton"></span>
+          ) : (
+            // eslint-disable-next-line
+            <img
+              src={image}
+              alt={tokenId}
+              className="rounded-xl"
+              style={{ opacity: loading ? 0 : 1 }}
+            />
+          )}
+        </div>
+        <div
+          className={
+            loading
+              ? "hidden ease-in-out duration-300"
+              : "hidden group-hover:absolute top-0 group-hover:flex items-center w-full h-full justify-center gap-4 flex-col backdrop-blur-xl border-[1px] border-white/10 rounded-xl bg-gradient-to-r from-indigo-300/10 to-blue/80 ease-in-out duration-300"
+          }
+        >
+          <button
+            className="leading-4 mb-0 py-[10px] px-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+            onClick={onUnStake}
+          >
+            UNSTAKE
+          </button>
+          <button
+            className="leading-4 mb-0 py-[10px] px-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+            onClick={onClaim}
+          >
+            CLAIM
+          </button>
+        </div>
       </div>
     </div>
   );
