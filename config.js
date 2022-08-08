@@ -1,6 +1,6 @@
 export const CHAIN_ID = 4002;
 export const StakingContract_Address =
-  "0x2359fbB80d8DcEF5d62d9cC3bb31E7297a58eb2e";
+  "0x5F3fCe21565665d90B2c9C5cFB0c9DF020e05b54";
 export const StakingContract_Address_NFT =
   "0x46b933f2B508A9a564eb77731363eD74f61FC409";
 export const SMARTCONTRACT_ADDRESS_ERC20 =
@@ -1053,6 +1053,32 @@ export const StakingContract_ABI = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "numberOfMinutes",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
+      },
+    ],
+    name: "setNFTToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -1069,11 +1095,37 @@ export const StakingContract_ABI = [
     inputs: [
       {
         internalType: "uint256",
+        name: "_numberOfMinutes",
+        type: "uint256",
+      },
+    ],
+    name: "setNumberOfMinutes",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
         name: "newRate",
         type: "uint256",
       },
     ],
     name: "setRewardRate",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
+      },
+    ],
+    name: "setRewardToken",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

@@ -149,7 +149,7 @@ export default function Hero() {
           detectRetina: true,
           background: {
             color: "#131329",
-            image: "./img/Stars.png",
+            image: "../img/Stars.png",
             position: "50% 50%",
             repeat: "repeat",
             size: "cover",

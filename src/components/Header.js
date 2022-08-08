@@ -11,16 +11,12 @@ export default function Header({ connected, signerAddress, connectWallet }) {
   return (
     <header>
       <Container>
-        <div className="bg-burple pt-10 pb-20 relative z-[49]">
+        <div className="pt-10 pb-20 relative z-[99]">
           <div className="mx-auto max-w-full sm:max-w-full md:max-w-7xl lg:max-w-7xl flex flex-row items-center px-6 sm:px-6 lg:px-0 justify-between">
             <div className="cursor-pointer">
-              <Link href="/">
-                <img
-                  alt="Moo World"
-                  src="./logo.png"
-                  className="w-[222px]"
-                />
-              </Link>
+              <a href="/">
+                <img alt="Moo World" src="./logo.png" className="w-[222px]" />
+              </a>
             </div>
             {show ? (
               ""
@@ -52,18 +48,14 @@ export default function Header({ connected, signerAddress, connectWallet }) {
             <div className="sm:hidden md:flex lg:flex hidden flex-col sm:flex-col md:flex-row lg:flex-row items-center">
               <div>
                 <Link href="https://discord.gg/mooworld">
-                  <a target="_blank">
-                    <button className="p-[12px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
-                      <FaDiscord size={34} />
-                    </button>
-                  </a>
+                  <button className="p-[12px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
+                    <FaDiscord size={34} />
+                  </button>
                 </Link>
                 <Link href="https://twitter.com/mooworldavax">
-                  <a target="_blank">
-                    <button className="p-[12px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
-                      <FaTwitter size={34} />
-                    </button>
-                  </a>
+                  <button className="p-[12px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
+                    <FaTwitter size={34} />
+                  </button>
                 </Link>
               </div>
               <div>
@@ -73,17 +65,13 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                 >
                   Shop
                 </button>
-                <button
-                  disabled
-                  className="cursor-default p-[16px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 px-10 bg-blue/75 text-white/20 ease-in-out duration-300"
-                >
-                  Stake
-                </button>
+                <Link href="/stake">
+                  <button className="p-[16px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 px-10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
+                    Stake
+                  </button>
+                </Link>
                 {connected && (
-                  <Link
-                    target="_blank"
-                    href="https://joepegs.com/collections/0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673"
-                  >
+                  <Link href="https://joepegs.com/collections/0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673">
                     <button className="p-[16px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 px-10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
                       View Moos
                     </button>
@@ -123,7 +111,7 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                           <Link href="/">
                             <img
                               alt="Moo World"
-                              src="/img/logo.png"
+                              src="./logo.png"
                               className="w-[180px] sm:w-[180px] md:w-[333px] lg:w-[333px] "
                             />
                           </Link>
@@ -166,18 +154,19 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                           </div>
                         </li>
                       </a>
+                      <li className="text-gray-800 pt-2">
+                        <div className="flex items-center">
+                          <Link href="/stake">
+                            <button className="cursor-pointer p-[16px] bg-blue/75 text-white/80 ease-in-out duration-300 hover:text-white/100">
+                              Stake
+                            </button>
+                          </Link>
+                        </div>
+                      </li>
                       <li className="text-gray-800">
                         <div className="flex items-center">
                           <button className="cursor-default p-[16px]  backdrop-blur-lg rounded-xl bg-blue/75 text-white/20 ease-in-out duration-300">
                             Shop{" "}
-                            <small className="ml-2 text-white/100">SOON</small>
-                          </button>
-                        </div>
-                      </li>
-                      <li className="text-gray-800 pt-2">
-                        <div className="flex items-center">
-                          <button className="cursor-default p-[16px] backdrop-blur-lg rounded-xl  bg-blue/75 text-white/20 ease-in-out duration-300">
-                            Stake
                             <small className="ml-2 text-white/100">SOON</small>
                           </button>
                         </div>
@@ -210,16 +199,16 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                         <ul className="flex">
                           <li className="cursor-pointer mr-2">
                             <div className="leading-4 p-[16px] backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300">
-                              <Link href="https://discord.gg/mooworld">
+                              <a href="https://discord.gg/mooworld">
                                 <FaDiscord size={18} />
-                              </Link>
+                              </a>
                             </div>
                           </li>
                           <li className="cursor-pointer">
                             <div className="leading-4 p-[16px] backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300s">
-                              <Link href="https://twitter.com/mooworldavax">
+                              <a href="https://twitter.com/mooworldavax">
                                 <FaTwitter size={18} />
-                              </Link>
+                              </a>
                             </div>
                           </li>
                         </ul>

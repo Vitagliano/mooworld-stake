@@ -7,7 +7,6 @@ import { ethers, providers } from "ethers";
 import { providerOptions } from "../contracts/utils";
 import {
   CHAIN_ID,
-  NETWORK,
   SITE_ERROR,
   SMARCONTRACT_INI_ABI,
   SMARTCONTRACT_ABI_ERC20,
@@ -20,6 +19,9 @@ import NFTCard from "../components/NFTCard";
 import { errorAlertCenter, successAlert } from "../components/toastGroup";
 import UnNFTCard from "../components/UnNFTCard";
 import { PageLoading } from "../components/Loading";
+import Hero from "../components/Hero";
+import Container from "../components/container";
+import MooTag from "../components/MooTag";
 
 let web3Modal = undefined;
 let contract = undefined;
@@ -29,6 +31,7 @@ let contract_nft = undefined;
 export default function Home() {
   const [connected, setConnected] = useState(false);
   const [signerAddress, setSignerAddress] = useState("");
+  const [nftHolded, setNftHolded] = useState();
   const [unstakedNFTs, setUnstakedNFTs] = useState();
   const [stakedNFTs, setStakedNFTs] = useState();
   const [loading, setLoading] = useState(false);
@@ -148,6 +151,7 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
+    setNftHolded(parseInt(balance));
     setUnstakedNFTs(unstaked);
     setStakedNFTs(staked);
     setTotalStaked(total);
@@ -275,123 +279,176 @@ export default function Home() {
           connectWallet={() => connectWallet()}
           connected={connected}
         />
-        <div className="w-full text-white">teste</div>
-        <div className="top-title">
-          <h1 className="title">Stake Your NFT</h1>
-          <p className="reward-rate">
-            daily reward rate:{" "}
-            <span>{dailyRewardRate === 0 ? "-- " : dailyRewardRate} MILK</span>
-          </p>
-        </div>
-        {connected && (
-          <div className="main-page">
-            <div className="title-bar">
-              <h2>Total staked NFT: {totalStaked}</h2>
-            </div>
-            <div className="nft-box">
-              <div className="box-header">
-                <h3>
-                  Your NFT {unstakedNFTs?.length && `(${unstakedNFTs?.length})`}
-                </h3>
-                <div className="box-control">
+        <Hero />
+
+        <Container>
+          {!connected && (
+            <div className="flex justify-center items-center w-full mt-4 lg:mt-0 z-50">
+              <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-16 xl:pb-8">
+                <h4 className="text-white text-[28px] text-center">
+                  Connect your wallet
+                </h4>
+                <p className="text-white text-[20px] text-center">
+                  We couldn’t detect a wallet. Connect a wallet to stake.
+                </p>
+                <div className="flex justify-center">
                   <button
-                    className="btn-second"
-                    onClick={onStakeAll}
-                    disabled={stakeAllLoading}
+                    className="mt-4 p-[12px] px-10 mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300 text-[22px]"
+                    onClick={() => connectWallet()}
                   >
-                    {stakeAllLoading ? (
-                      <div className="btn-loading">
-                        <PageLoading />
-                      </div>
-                    ) : (
-                      <>STAKE ALL</>
-                    )}
+                    Connect Wallet
                   </button>
                 </div>
               </div>
-              <div className="box">
-                {loading ? (
-                  <PageLoading />
-                ) : (
-                  <div className="box-content">
-                    {unstakedNFTs &&
-                      unstakedNFTs.length !== 0 &&
-                      unstakedNFTs.map((item, key) => (
-                        <NFTCard
-                          id={item.id}
-                          key={key}
-                          status={item.status}
-                          tokenId={item.tokenId}
-                          signerAddress={signerAddress}
-                          updatePage={() => updatePage(signerAddress)}
-                          contract={contract}
-                          contract_nft={contract_nft}
-                        />
-                      ))}
-                  </div>
-                )}
-              </div>
             </div>
-            <div className="nft-box">
-              <div className="box-header">
-                <h3>
-                  Staked NFT {stakedNFTs?.length && `(${stakedNFTs?.length})`}
-                </h3>
-                <div className="box-control">
-                  <button
-                    className="btn-second"
-                    onClick={onUnstakeAll}
-                    disabled={unstakeAllLoading}
-                  >
-                    {unstakeAllLoading ? (
-                      <div className="btn-loading">
-                        <PageLoading />
-                      </div>
-                    ) : (
-                      <>UNSTAKE ALL</>
-                    )}
-                  </button>
-                  <button
-                    className="btn-second"
-                    onClick={onClaimAll}
-                    disabled={claimAllLoading}
-                  >
-                    {claimAllLoading ? (
-                      <div className="btn-loading">
-                        <PageLoading />
-                      </div>
-                    ) : (
-                      <>CLAIM ALL</>
-                    )}
-                  </button>
+          )}
+
+          {connected && (
+            <>
+              <div className="flex justify-center items-center w-full lg:mt-0 mb-10 z-50">
+                <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-12 xl:pb-8">
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <h1 className="text-xl sm:text-3xl w-full text-white">
+                        Stake your Moo
+                      </h1>
+                      <h1 className="text-lg sm:text-1xl  text-white">
+                        Daily reward rate:{" "}
+                        {dailyRewardRate === 0 ? "-- " : dailyRewardRate} $MILK
+                        • Total staked NFT: {totalStaked}
+                      </h1>
+                    </div>
+                    <MooTag
+                      mooQuantity={unstakedNFTs?.length + stakedNFTs?.length}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="box">
-                {loading ? (
-                  <PageLoading />
-                ) : (
-                  <div className="box-content">
-                    {stakedNFTs &&
-                      stakedNFTs.length !== 0 &&
-                      stakedNFTs.map((item, key) => (
-                        <UnNFTCard
-                          key={key}
-                          id={item.id}
-                          status={item.status}
-                          stakingId={item.stakingId}
-                          tokenId={item.tokenId}
-                          signerAddress={signerAddress}
-                          updatePage={() => updatePage(signerAddress)}
-                          contract={contract}
-                          contract_nft={contract_nft}
-                        />
-                      ))}
+
+              {/* <div className="grid overflow-hidden lg grid-cols-2 grid-rows-1 gap-1 grid-flow-row relative z-50"> */}
+              <div className="flex items-center justify-center w-full relative z-50">
+                <div className="flex gap-6 md:w-11/12 xl:w-10/12 ">
+                  {/* <div className="box row-start-1 row-end-1 col-start-1 col-end-1"> */}
+                  <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-12 xl:pb-8">
+                    <div className="flex flex-row justify-between items-center">
+                      <h4 className="text-white text-[28px]">
+                        Your NFT{" "}
+                        {unstakedNFTs?.length && `(${unstakedNFTs?.length})`}
+                      </h4>
+                      <button
+                        className={
+                          stakeAllLoading
+                            ? "w-[120px] h-[50px] leading-4 mb-0 p-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+                            : "leading-4 mb-0 p-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+                        }
+                        onClick={onStakeAll}
+                        disabled={stakeAllLoading}
+                      >
+                        {stakeAllLoading ? (
+                          <div className="btn-loading">
+                            <PageLoading />
+                          </div>
+                        ) : (
+                          <>STAKE ALL</>
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="mt-4 grid overflow-hidden grid-cols-3 grid-rows-1 gap-6 grid-flow-row">
+                      {loading ? (
+                        <PageLoading />
+                      ) : (
+                        unstakedNFTs &&
+                        unstakedNFTs.length !== 0 &&
+                        unstakedNFTs.map((item, key) => (
+                          <NFTCard
+                            id={item.id}
+                            key={key}
+                            status={item.status}
+                            tokenId={item.tokenId}
+                            signerAddress={signerAddress}
+                            updatePage={() => updatePage(signerAddress)}
+                            contract={contract}
+                            contract_nft={contract_nft}
+                          />
+                        ))
+                      )}
+                    </div>
                   </div>
-                )}
+                  {/* </div>
+                <div className="box row-start-1 row-end-1 col-start-2 col-end-2"> */}
+                  <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-12 xl:pb-8">
+                    <div className="flex flex-row justify-between items-center">
+                      <h4 className="text-white text-[28px]">
+                        Staked NFT
+                        {stakedNFTs?.length && ` (${stakedNFTs?.length})`}
+                      </h4>
+                      <div className="flex flex-row gap-4">
+                        <button
+                          className={
+                            unstakeAllLoading
+                              ? "w-[136px] h-[50px] leading-4 mb-0 p-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+                              : "leading-4 mb-0 p-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+                          }
+                          onClick={onUnstakeAll}
+                          disabled={unstakeAllLoading}
+                        >
+                          {unstakeAllLoading ? (
+                            <div className="btn-loading">
+                              <PageLoading />
+                            </div>
+                          ) : (
+                            <>UNSTAKE ALL</>
+                          )}
+                        </button>
+                        <button
+                          className={
+                            claimAllLoading
+                              ? "w-[111px] h-[50px] leading-4 mb-0 p-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+                              : "leading-4 mb-0 p-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+                          }
+                          onClick={onClaimAll}
+                          disabled={claimAllLoading}
+                        >
+                          {claimAllLoading ? (
+                            <div className="btn-loading">
+                              <PageLoading />
+                            </div>
+                          ) : (
+                            <>CLAIM ALL</>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 grid overflow-hidden grid-cols-3 grid-rows-1 gap-6 grid-flow-row">
+                      {loading ? (
+                        <PageLoading />
+                      ) : (
+                        stakedNFTs &&
+                        stakedNFTs.length !== 0 &&
+                        stakedNFTs.map((item, key) => (
+                          <UnNFTCard
+                            key={key}
+                            id={item.id}
+                            status={item.status}
+                            stakingId={item.stakingId}
+                            tokenId={item.tokenId}
+                            signerAddress={signerAddress}
+                            updatePage={() => updatePage(signerAddress)}
+                            contract={contract}
+                            contract_nft={contract_nft}
+                          />
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </div>
+                {/* </div> */}
               </div>
-            </div>
-          </div>
-        )}
+            </>
+          )}
+        </Container>
       </main>
     </>
   );
