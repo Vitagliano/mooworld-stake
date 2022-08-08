@@ -971,6 +971,19 @@ export const StakingContract_ABI = [
   {
     inputs: [
       {
+        internalType: "uint256[]",
+        name: "stakingId",
+        type: "uint256[]",
+      },
+    ],
+    name: "claimAll",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "stakingId",
         type: "uint256",
@@ -1016,6 +1029,26 @@ export const StakingContract_ABI = [
         type: "tuple",
       },
     ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "endDate",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "endStaking",
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -1126,6 +1159,24 @@ export const StakingContract_ABI = [
       },
     ],
     name: "setRewardToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256[]",
+        name: "tokenId",
+        type: "uint256[]",
+      },
+    ],
+    name: "stakeAll",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
