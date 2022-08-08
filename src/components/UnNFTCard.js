@@ -86,7 +86,7 @@ export default function UnNFTCard({
   return (
     <div className="w-full">
       <div className="relative group">
-        <div className="absolute bottom-0 p-2 text-white ">
+        <div className="absolute bottom-0 p-2 text-white">
           <p>Moo #{tokenId}</p>
           <p>Reward:</p>
           <span>{parseFloat(reward).toLocaleString()} MILK</span>

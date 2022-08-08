@@ -188,7 +188,7 @@ export default function Home() {
         );
         await approve.wait();
       }
-      const stake = await contract.callStakeToken(
+      const stake = await contract.stakeAll(
         StakingContract_Address_NFT,
         unstaked
       );
@@ -227,7 +227,7 @@ export default function Home() {
       staked.push(item.id);
     }
     try {
-      const unstake = await contract.claimStake(staked);
+      const unstake = await contract.claimAll(staked);
       await unstake.wait();
       successAlert("Claiming is successful.");
       updatePage(signerAddress);
@@ -332,8 +332,8 @@ export default function Home() {
                   <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-12 xl:pb-8">
                     <div className="flex flex-row justify-between items-center">
                       <h4 className="text-white text-[28px]">
-                        Your NFT{" "}
-                        {unstakedNFTs?.length && `(${unstakedNFTs?.length})`}
+                        Your NFT (
+                        {unstakedNFTs?.length && `${unstakedNFTs?.length}`})
                       </h4>
                       <button
                         className={
@@ -380,8 +380,8 @@ export default function Home() {
                   <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-12 xl:pb-8">
                     <div className="flex flex-row justify-between items-center">
                       <h4 className="text-white text-[28px]">
-                        Staked NFT
-                        {stakedNFTs?.length && ` (${stakedNFTs?.length})`}
+                        Staked NFT (
+                        {stakedNFTs?.length && ` ${stakedNFTs?.length}`})
                       </h4>
                       <div className="flex flex-row gap-4">
                         <button
