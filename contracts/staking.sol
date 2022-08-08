@@ -264,6 +264,7 @@ contract StakeNFT {
     uint private rate;
     uint256 public stakingStartTime;
     uint256 public numberOfMinutes;
+    uint256 public endDate;
     bool initialised;
 
     //constructor
@@ -282,6 +283,7 @@ contract StakeNFT {
         require(!initialised, "Already initialised");
         stakingStartTime = block.timestamp;
         initialised = true;
+        endDate = 0;
     }
 
 
@@ -372,9 +374,13 @@ contract StakeNFT {
         require(block.timestamp >= staking.releaseTime, "Has not passed minimum minutes");
         require(staking.staker == msg.sender,"You cannot cancel this staking as it is not listed under this address");
         require(staking.status == StakingStatus.Claimable,"Your reward is either not claimable yet or has been claimed");
-
-        uint amount = rate * (block.timestamp - staking.releaseTime) / numberOfMinutes * 1 minutes;
-
+        uint amount;
+        if (staking.status == StakingStatus.Cancelled) {
+            amount = rate * (endDate - staking.releaseTime) / numberOfMinutes * 1 minutes;
+        } else {
+            amount = rate * (block.timestamp - staking.releaseTime) / numberOfMinutes * 1 minutes;
+        }
+        
         IERC20(REWARDToken).transfer(msg.sender, amount);
 
         staking.status = StakingStatus.Claimed;
@@ -383,6 +389,10 @@ contract StakeNFT {
         emit tokenClaimComplete(staking.token, staking.tokenId, staking.status, staking.StakingId);
         
         return _StakedItem[stakingId];
+    }
+
+    function endStaking() external onlyAdmin {
+        endDate = block.timestamp;
     }
     
 
