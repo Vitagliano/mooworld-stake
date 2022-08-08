@@ -288,7 +288,7 @@ contract StakeNFT {
 
 
     //enumerator
-    enum StakingStatus {Active, Claimable, Claimed, Cancelled}
+    enum StakingStatus {Active, Claimed, Cancelled}
 
     //structs
     struct Staking {
@@ -336,7 +336,7 @@ contract StakeNFT {
         
         uint currentStakingId = _stakingId;
 
-        Staking memory staking = Staking(msg.sender,token, tokenId, releaseTime, StakingStatus.Claimable, currentStakingId);
+        Staking memory staking = Staking(msg.sender,token, tokenId, releaseTime, StakingStatus.Active, currentStakingId);
         
 
         _StakedItem[_stakingId] = staking;
@@ -359,7 +359,7 @@ contract StakeNFT {
     //     require(staker == msg.sender,"You cannot check this staking as it is not listed under this address");
     //     require(staking.status == StakingStatus.Active,"Staking is not active or claimed");
     //     if (block.timestamp >= staking.releaseTime) {
-    //         staking.status = StakingStatus.Claimable;
+    //         staking.status = StakingStatus.Active;
     //     }
 
     //     emit tokenClaimStatus(staking.token, staking.tokenId, staking.status, staking.StakingId);
@@ -368,12 +368,24 @@ contract StakeNFT {
  
     // }
 
+    function stakeAll(address token, uint[] memory tokenId) external {
+        for (uint i = 0; i < tokenId.length; i++) {
+            stakeToken(token, tokenId[i]);
+        }
+    }
+
+    function claimAll(uint[] memory stakingId) external {
+        for (uint i = 0; i < stakingId.length; i++) {
+            claimStake(stakingId[i]);
+        }
+    }
+
     //function to claim reward token if NFT stake duration is completed
     function claimStake(uint stakingId) public returns(Staking memory){
         Staking storage staking = _StakedItem[stakingId];
         require(block.timestamp >= staking.releaseTime, "Has not passed minimum minutes");
-        require(staking.staker == msg.sender,"You cannot cancel this staking as it is not listed under this address");
-        require(staking.status == StakingStatus.Claimable,"Your reward is either not claimable yet or has been claimed");
+        require(staking.staker == msg.sender, "You cannot claim this staking as it is not listed under this address");
+        require(staking.status == StakingStatus.Active,"Your reward is either not active yet or has been claimed");
         uint amount;
         if (staking.status == StakingStatus.Cancelled) {
             amount = rate * (endDate - staking.releaseTime) / numberOfMinutes * 1 minutes;
@@ -399,8 +411,8 @@ contract StakeNFT {
     //function to cancel NFT stake
     function cancelStake(uint stakingId) public returns (Staking memory) {
         Staking storage staking = _StakedItem[stakingId];
-        require(staking.staker == msg.sender,"You cannot cancel this staking as it is not listed under this address");
-        require(staking.status == StakingStatus.Active,"Staking is either not active (Cancalled or in claiming process)");
+        require(staking.staker == msg.sender, "You cannot cancel this staking as it is not listed under this address");
+        require(staking.status == StakingStatus.Active,"Staking is either not active (Cancelled or in claiming process)");
         
         staking.status = StakingStatus.Cancelled;
         IERC721(staking.token).transferFrom(address(this), msg.sender, staking.tokenId);
