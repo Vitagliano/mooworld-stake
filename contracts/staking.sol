@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.7;
+pragma solidity ^0.8.15;
 
 // import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 // import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
@@ -263,11 +263,18 @@ contract StakeNFT {
     address private admin;
     uint private rate;
     uint256 public stakingStartTime;
+    uint256 public numberOfMinutes;
     bool initialised;
 
     //constructor
     constructor(){
         admin = msg.sender;
+        numberOfMinutes = 5;
+    }
+
+    modifier onlyAdmin {
+        require(msg.sender == admin, "Only admin can perform this action");
+        _;
     }
 
     function initStaking() public onlyAdmin {
@@ -301,17 +308,28 @@ contract StakeNFT {
     event tokenClaimComplete(address indexed token, uint indexed token_id, StakingStatus indexed status, uint StakingId);
     event tokenCancelComplete(address indexed token, uint indexed token_id, StakingStatus indexed status, uint StakingId);
 
+    function setNFTToken(address _token) external onlyAdmin {
+        NFTToken = _token;
+    }
+
+    function setRewardToken(address _token) external onlyAdmin {
+        REWARDToken = _token;
+    }
+
+    function setNumberOfMinutes(uint256 _numberOfMinutes) external onlyAdmin {
+        numberOfMinutes = _numberOfMinutes;
+    }
+
     //function to call another function
-    function callStakeToken(address token, uint _tokenID) public {
+    function callStakeToken(address token, uint _tokenID) external {
         require(token == NFTToken, "incorrect NFT to stake"); // hardcode the NFT smart contract to allow only specific NFT into staking, assume 0xd2...d005 as NFT contract address
         stakeToken(token, _tokenID);
     }
 
     //function to transfer NFT from user to contract
-    function stakeToken(address token, uint tokenId)private returns(Staking memory) {
+    function stakeToken(address token, uint tokenId) internal returns(Staking memory) {
         require(initialised, "Staking System: the staking has not started");
         IERC721(token).transferFrom(msg.sender,address(this),tokenId); // User must approve() this contract address via the NFT ERC721 contract before NFT can be transfered
-        uint256 numberOfMinutes = 5; //hardcoded as 5 minutes
         uint releaseTime = block.timestamp + (numberOfMinutes * 1 minutes);
         
         uint currentStakingId = _stakingId;
@@ -351,11 +369,11 @@ contract StakeNFT {
     //function to claim reward token if NFT stake duration is completed
     function claimStake(uint stakingId) public returns(Staking memory){
         Staking storage staking = _StakedItem[stakingId];
-        require(block.timestamp >= staking.releaseTime, "Has not passed 5 minutes");
+        require(block.timestamp >= staking.releaseTime, "Has not passed minimum minutes");
         require(staking.staker == msg.sender,"You cannot cancel this staking as it is not listed under this address");
         require(staking.status == StakingStatus.Claimable,"Your reward is either not claimable yet or has been claimed");
 
-        uint amount = rate * (block.timestamp - staking.releaseTime) / 5 minutes;
+        uint amount = rate * (block.timestamp - staking.releaseTime) / numberOfMinutes * 1 minutes;
 
         IERC20(REWARDToken).transfer(msg.sender, amount);
 
@@ -393,10 +411,6 @@ contract StakeNFT {
 
     function getTotalStaked() external view returns (uint) {
         return _stakingId;
-    }
-    modifier onlyAdmin{
-        require(admin == msg.sender, "OA");
-        _;
     }
 
     function setNewAdmin(address newAdd) external onlyAdmin{
