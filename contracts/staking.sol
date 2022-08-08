@@ -388,9 +388,9 @@ contract StakeNFT {
         require(staking.status == StakingStatus.Active,"Your reward is either not active yet or has been claimed");
         uint amount;
         if (staking.status == StakingStatus.Cancelled) {
-            amount = rate * (endDate - staking.releaseTime) / numberOfMinutes * 1 minutes;
+            amount = rate * (endDate - staking.releaseTime) / 1 days;
         } else {
-            amount = rate * (block.timestamp - staking.releaseTime) / numberOfMinutes * 1 minutes;
+            amount = rate * (block.timestamp - staking.releaseTime) / 1 days;
         }
         
         IERC20(REWARDToken).transfer(msg.sender, amount);
