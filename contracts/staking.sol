@@ -395,7 +395,7 @@ contract StakeNFT {
         require(staking.staker == msg.sender, "You cannot claim this staking as it is not listed under this address");
         require(staking.status == StakingStatus.Active,"Your reward is either not active yet or has been claimed");
         uint amount;
-        if (staking.status == StakingStatus.Cancelled) {
+        if (endDate != 0) {
             amount = staking.emission * (multiplier[staking.tokenId] + 100) / 100 * (endDate - staking.releaseTime) / 1 days;
         } else {
             amount = staking.emission * (multiplier[staking.tokenId] + 100) / 100 * (block.timestamp - staking.releaseTime) / 1 days;
