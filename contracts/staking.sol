@@ -295,6 +295,7 @@ contract StakeNFT {
         address staker;    
         address token;
         uint tokenId;
+        uint emission;
         uint releaseTime;
         StakingStatus status;
         uint StakingId;
@@ -343,7 +344,7 @@ contract StakeNFT {
         
         uint currentStakingId = _stakingId;
 
-        Staking memory staking = Staking(msg.sender,token, tokenId, releaseTime, StakingStatus.Active, currentStakingId);
+        Staking memory staking = Staking(msg.sender,token, tokenId, rate, releaseTime, StakingStatus.Active, currentStakingId);
         
 
         _StakedItem[_stakingId] = staking;
@@ -395,9 +396,9 @@ contract StakeNFT {
         require(staking.status == StakingStatus.Active,"Your reward is either not active yet or has been claimed");
         uint amount;
         if (staking.status == StakingStatus.Cancelled) {
-            amount = rate * multiplier[staking.tokenId] / 100 * (endDate - staking.releaseTime) / 1 days;
+            amount = staking.emission * (multiplier[staking.tokenId] + 100) / 100 * (endDate - staking.releaseTime) / 1 days;
         } else {
-            amount = rate * multiplier[staking.tokenId] / 100 * (block.timestamp - staking.releaseTime) / 1 days;
+            amount = staking.emission * (multiplier[staking.tokenId] + 100) / 100 * (block.timestamp - staking.releaseTime) / 1 days;
         }
         
         IERC20(REWARDToken).transfer(msg.sender, amount);
