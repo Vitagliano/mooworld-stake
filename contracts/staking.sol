@@ -301,10 +301,11 @@ contract StakeNFT {
         uint StakingId;
     }
 
-    //mapping tokenId => multiplier
+    //mapping tokenId => bonus
     mapping(uint => Staking) private _StakedItem; 
-    mapping(uint => uint) private multiplier;
+    mapping(uint => uint) private bonus;
 
+    bool public kingdomOnly;
 
     //event
     event tokenStaked(address indexed staker, address indexed token, uint token_id, StakingStatus status, uint StakingId);
@@ -324,20 +325,21 @@ contract StakeNFT {
         numberOfMinutes = _numberOfMinutes;
     }
 
-    function setMultiplier(uint256[] memory tokenId, uint256[] memory x) external onlyAdmin {
+    function setBonus(uint256[] memory tokenId, uint256[] memory x) external onlyAdmin {
         for(uint i = 0; i < tokenId.length; i++) {
-            multiplier[tokenId[i]] = x[i];
+            bonus[tokenId[i]] = x[i];
         }
     }
 
     //function to call another function
     function callStakeToken(address token, uint _tokenID) external {
-        require(token == NFTToken, "incorrect NFT to stake"); // hardcode the NFT smart contract to allow only specific NFT into staking, assume 0xd2...d005 as NFT contract address
-        stakeToken(token, _tokenID);
+        require(token == NFTToken, "incorrect NFT to stake");
+        require(!kingdomOnly, "You are not in the kingdom");
+        _stakeToken(token, _tokenID);
     }
 
     //function to transfer NFT from user to contract
-    function stakeToken(address token, uint tokenId) internal returns(Staking memory) {
+    function _stakeToken(address token, uint tokenId) internal returns(Staking memory) {
         require(initialised, "Staking System: the staking has not started");
         IERC721(token).transferFrom(msg.sender,address(this),tokenId); // User must approve() this contract address via the NFT ERC721 contract before NFT can be transfered
         uint releaseTime = block.timestamp + (numberOfMinutes * 1 minutes);
@@ -377,8 +379,11 @@ contract StakeNFT {
     // }
 
     function stakeAll(address token, uint[] memory tokenId) external {
+        if (kingdomOnly){
+            require(tokenId.length >= 7, "You must stake at least 7 NFTs");
+        }
         for (uint i = 0; i < tokenId.length; i++) {
-            stakeToken(token, tokenId[i]);
+            _stakeToken(token, tokenId[i]);
         }
     }
 
@@ -396,9 +401,9 @@ contract StakeNFT {
         require(staking.status == StakingStatus.Active,"Your reward is either not active yet or has been claimed");
         uint amount;
         if (endDate != 0) {
-            amount = staking.emission * (multiplier[staking.tokenId] + 100) / 100 * (endDate - staking.releaseTime) / 1 days;
+            amount = staking.emission * (bonus[staking.tokenId] + 100) / 100 * (endDate - staking.releaseTime) / 1 days;
         } else {
-            amount = staking.emission * (multiplier[staking.tokenId] + 100) / 100 * (block.timestamp - staking.releaseTime) / 1 days;
+            amount = staking.emission * (bonus[staking.tokenId] + 100) / 100 * (block.timestamp - staking.releaseTime) / 1 days;
         }
         
         IERC20(REWARDToken).transfer(msg.sender, amount);
@@ -409,6 +414,10 @@ contract StakeNFT {
         emit tokenClaimComplete(staking.token, staking.tokenId, staking.status, staking.StakingId);
         
         return _StakedItem[stakingId];
+    }
+
+    function changeMooKingdom(bool _state) external onlyAdmin {
+        kingdomOnly = _state;
     }
 
     function endStaking() external onlyAdmin {
