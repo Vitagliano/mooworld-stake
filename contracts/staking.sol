@@ -295,13 +295,15 @@ contract StakeNFT {
         address staker;    
         address token;
         uint tokenId;
+        uint emission;
         uint releaseTime;
         StakingStatus status;
         uint StakingId;
     }
 
-    //mapping
+    //mapping tokenId => multiplier
     mapping(uint => Staking) private _StakedItem; 
+    mapping(uint => uint) private multiplier;
 
 
     //event
@@ -322,6 +324,12 @@ contract StakeNFT {
         numberOfMinutes = _numberOfMinutes;
     }
 
+    function setMultiplier(uint256[] memory tokenId, uint256[] memory x) external onlyAdmin {
+        for(uint i = 0; i < tokenId.length; i++) {
+            multiplier[tokenId[i]] = x[i];
+        }
+    }
+
     //function to call another function
     function callStakeToken(address token, uint _tokenID) external {
         require(token == NFTToken, "incorrect NFT to stake"); // hardcode the NFT smart contract to allow only specific NFT into staking, assume 0xd2...d005 as NFT contract address
@@ -336,7 +344,7 @@ contract StakeNFT {
         
         uint currentStakingId = _stakingId;
 
-        Staking memory staking = Staking(msg.sender,token, tokenId, releaseTime, StakingStatus.Active, currentStakingId);
+        Staking memory staking = Staking(msg.sender,token, tokenId, rate, releaseTime, StakingStatus.Active, currentStakingId);
         
 
         _StakedItem[_stakingId] = staking;
@@ -387,10 +395,10 @@ contract StakeNFT {
         require(staking.staker == msg.sender, "You cannot claim this staking as it is not listed under this address");
         require(staking.status == StakingStatus.Active,"Your reward is either not active yet or has been claimed");
         uint amount;
-        if (staking.status == StakingStatus.Cancelled) {
-            amount = rate * (endDate - staking.releaseTime) / 1 days;
+        if (endDate != 0) {
+            amount = staking.emission * (multiplier[staking.tokenId] + 100) / 100 * (endDate - staking.releaseTime) / 1 days;
         } else {
-            amount = rate * (block.timestamp - staking.releaseTime) / 1 days;
+            amount = staking.emission * (multiplier[staking.tokenId] + 100) / 100 * (block.timestamp - staking.releaseTime) / 1 days;
         }
         
         IERC20(REWARDToken).transfer(msg.sender, amount);
