@@ -1,6 +1,6 @@
 export const CHAIN_ID = 4002;
 export const StakingContract_Address =
-  "0x5F3fCe21565665d90B2c9C5cFB0c9DF020e05b54";
+  "0x686aA74A56aCaEB1D7d8aB4C026B7a9251f949A8";
 export const StakingContract_Address_NFT =
   "0x46b933f2B508A9a564eb77731363eD74f61FC409";
 export const SMARTCONTRACT_ADDRESS_ERC20 =

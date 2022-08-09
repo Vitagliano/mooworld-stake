@@ -151,10 +151,10 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
-    setNftHolded(parseInt(balance));
     setUnstakedNFTs(unstaked);
     setStakedNFTs(staked);
     setTotalStaked(total);
+    console.log("total", nftHolded);
     setLoading(false);
   };
 
@@ -318,9 +318,7 @@ export default function Home() {
                         • Total staked NFT: {totalStaked}
                       </h1>
                     </div>
-                    <MooTag
-                      mooQuantity={unstakedNFTs?.length + stakedNFTs?.length}
-                    />
+                    {/* <MooTag mooQuantity={nftHolded} /> */}
                   </div>
                 </div>
               </div>
@@ -381,7 +379,7 @@ export default function Home() {
                     <div className="flex flex-row justify-between items-center">
                       <h4 className="text-white text-[28px]">
                         Staked NFT (
-                        {stakedNFTs?.length && ` ${stakedNFTs?.length}`})
+                        {stakedNFTs?.length && `${stakedNFTs?.length}`})
                       </h4>
                       <div className="flex flex-row gap-4">
                         <button

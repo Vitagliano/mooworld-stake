@@ -33,14 +33,11 @@ export default function UnNFTCard({
       });
   };
 
-  const getReward = async () => {
-    const now = new Date().getTime() / 1000;
-    const rate = parseFloat(await contract.getRewardRate()) * 0.9;
-    // const rate = parseFloat(await contract.getRewardRate()) / Math.pow(10, 18);
-    const data = await contract.viewStake(id);
-    const reward =
-      ((now - parseFloat(data.releaseTime)) * rate) / (24 * 60 * 60) / 25;
-    setReward(reward);
+  const getReward = async (stakingid) => {
+    const rate = parseFloat(await contract.getRewardRate()) / 10 ** 18;
+    const data = await contract.viewStake(stakingid);
+    const multiplier = contract.multiplier(data.tokenId);
+    return ((multiplier + 100) * rate) / 100;
   };
 
   const showReward = () => {
