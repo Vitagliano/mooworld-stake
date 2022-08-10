@@ -283,6 +283,7 @@ contract StakeNFT {
         require(!initialised, "Already initialised");
         stakingStartTime = block.timestamp;
         initialised = true;
+        kingdomOnly = true;
         endDate = 0;
     }
 
@@ -334,7 +335,7 @@ contract StakeNFT {
     //function to call another function
     function callStakeToken(address token, uint _tokenID) external {
         require(token == NFTToken, "incorrect NFT to stake");
-        require(!kingdomOnly, "You are not in the kingdom");
+        require(!kingdomOnly, "only kingdom at this time");
         _stakeToken(token, _tokenID);
     }
 
