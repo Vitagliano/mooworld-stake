@@ -303,7 +303,7 @@ contract StakeNFT {
 
     //mapping tokenId => bonus
     mapping(uint => Staking) private _StakedItem; 
-    mapping(uint => uint) private bonus;
+    mapping(uint => uint) public bonus;
 
     bool public kingdomOnly;
 
