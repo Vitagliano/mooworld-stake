@@ -1,10 +1,10 @@
-export const CHAIN_ID = 4002;
+export const CHAIN_ID = 43113;
 export const StakingContract_Address =
-  "0x686aA74A56aCaEB1D7d8aB4C026B7a9251f949A8";
+  "0x85D08A15A750d36dcb7Aa4a03A94e073212cDF56";
 export const StakingContract_Address_NFT =
-  "0x46b933f2B508A9a564eb77731363eD74f61FC409";
+  "0x19D4434173EF5d24BAFB27FC504791f9827CEF71";
 export const SMARTCONTRACT_ADDRESS_ERC20 =
-  "0xb328e911ae5b6967297dc32133fb5b6e0acf5891";
+  "0xD22e0b01048A2BC3Bbc2c2afDC63e338395f176B";
 export const NETWORK = "Testnet";
 
 export const SITE_ERROR = [
@@ -14,7 +14,18 @@ export const SITE_ERROR = [
 
 export const SMARCONTRACT_INI_ABI = [
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "baseURI",
+        type: "string",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "constructor",
   },
@@ -189,6 +200,32 @@ export const SMARCONTRACT_INI_ABI = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "collectionSize",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "defaultBaseURI",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -220,27 +257,7 @@ export const SMARCONTRACT_INI_ABI = [
         type: "uint256",
       },
     ],
-    name: "giveaway",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "infect",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-    ],
-    name: "infectForAddress",
+    name: "give",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -264,64 +281,6 @@ export const SMARCONTRACT_INI_ABI = [
         internalType: "bool",
         name: "",
         type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "whitelistedAddress",
-        type: "address",
-      },
-    ],
-    name: "isWhitelisted",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "maxGiveaway",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "maxMintable",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "maxTokens",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -473,26 +432,13 @@ export const SMARCONTRACT_INI_ABI = [
       },
       {
         internalType: "bytes",
-        name: "_data",
+        name: "data",
         type: "bytes",
       },
     ],
     name: "safeTransferFrom",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "salesAvailable",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -517,7 +463,7 @@ export const SMARCONTRACT_INI_ABI = [
     inputs: [
       {
         internalType: "string",
-        name: "newBaseURI",
+        name: "baseURI",
         type: "string",
       },
     ],
@@ -529,51 +475,12 @@ export const SMARCONTRACT_INI_ABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "newMaxGiveaway",
-        type: "uint256",
-      },
-    ],
-    name: "setMaxGiveaway",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "newMintPrice",
-        type: "uint256",
-      },
-    ],
-    name: "setMintPrice",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
-        name: "newPayableAddress",
+        name: "to",
         type: "address",
       },
     ],
     name: "setPayableAddress",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "contractAddress",
-        type: "address",
-      },
-    ],
-    name: "setVirusAddress",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -612,14 +519,7 @@ export const SMARCONTRACT_INI_ABI = [
   },
   {
     inputs: [],
-    name: "toggleSalesAvailable",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "toggleWhitelistSale",
+    name: "togglePause",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -736,26 +636,19 @@ export const SMARCONTRACT_INI_ABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "whitelistPrice",
-    outputs: [
+    inputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: "address",
+        name: "to",
+        type: "address",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "whitelistSale",
+    name: "walletOfOwner",
     outputs: [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
+        internalType: "uint256[]",
+        name: "tokenIds",
+        type: "uint256[]",
       },
     ],
     stateMutability: "view",
@@ -946,6 +839,11 @@ export const StakingContract_ABI = [
           },
           {
             internalType: "uint256",
+            name: "emission",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
             name: "releaseTime",
             type: "uint256",
           },
@@ -965,6 +863,19 @@ export const StakingContract_ABI = [
         type: "tuple",
       },
     ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bool",
+        name: "_state",
+        type: "bool",
+      },
+    ],
+    name: "changeMooKingdom",
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -1006,6 +917,11 @@ export const StakingContract_ABI = [
           {
             internalType: "uint256",
             name: "tokenId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "emission",
             type: "uint256",
           },
           {
@@ -1087,6 +1003,19 @@ export const StakingContract_ABI = [
   },
   {
     inputs: [],
+    name: "kingdomOnly",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "numberOfMinutes",
     outputs: [
       {
@@ -1096,6 +1025,24 @@ export const StakingContract_ABI = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256[]",
+        name: "tokenId",
+        type: "uint256[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "x",
+        type: "uint256[]",
+      },
+    ],
+    name: "setBonus",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -1219,6 +1166,11 @@ export const StakingContract_ABI = [
           {
             internalType: "uint256",
             name: "tokenId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "emission",
             type: "uint256",
           },
           {

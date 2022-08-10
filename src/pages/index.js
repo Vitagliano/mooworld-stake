@@ -75,11 +75,9 @@ export default function Home() {
           signer
         );
 
-        setDailyRewardRate((await contract.getRewardRate()) * 0.9);
-        // setDailyRewardRate(
-        //   (await contract.getRewardRate()) / Math.pow(10, 18) / 25
-        // );
-
+        setDailyRewardRate(
+          parseFloat(await contract.getRewardRate()) / 10 ** 18
+        );
         /////////////////
         updatePage(address);
         /////////////////
@@ -154,7 +152,7 @@ export default function Home() {
     setUnstakedNFTs(unstaked);
     setStakedNFTs(staked);
     setTotalStaked(total);
-    console.log("total", nftHolded);
+    setNftHolded(unstaked.length + staked.length);
     setLoading(false);
   };
 
@@ -318,7 +316,7 @@ export default function Home() {
                         • Total staked NFT: {totalStaked}
                       </h1>
                     </div>
-                    {/* <MooTag mooQuantity={nftHolded} /> */}
+                    <MooTag mooQuantity={nftHolded} />
                   </div>
                 </div>
               </div>
