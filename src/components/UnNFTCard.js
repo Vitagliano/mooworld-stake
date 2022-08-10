@@ -99,7 +99,7 @@ export default function UnNFTCard({
           ) : (
             // eslint-disable-next-line
             <img
-              src={image}
+              src={image.replace("ipfs://", "https://ipfs.io/ipfs/")}
               alt={tokenId}
               className="rounded-xl"
               style={{ opacity: loading ? 0 : 1 }}
