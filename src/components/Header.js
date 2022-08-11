@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FaDiscord, FaTwitter } from "react-icons/fa";
 import Container from "./container";
 export default function Header({ connected, signerAddress, connectWallet }) {
@@ -14,9 +15,9 @@ export default function Header({ connected, signerAddress, connectWallet }) {
         <div className="pt-10 pb-5 relative z-[99]">
           <div className="mx-auto max-w-full sm:max-w-full md:max-w-7xl lg:max-w-7xl flex flex-row items-center px-6 sm:px-6 lg:px-0 justify-between">
             <div className="cursor-pointer">
-              <a href="/">
-                <img alt="Moo World" src="./logo.png" className="w-[222px]" />
-              </a>
+              <Link passHref href="/">
+                <Image alt="Moo World" src="./logo.png" className="w-[222px]" />
+              </Link>
             </div>
             {show ? (
               ""
@@ -47,12 +48,12 @@ export default function Header({ connected, signerAddress, connectWallet }) {
             )}
             <div className="sm:hidden md:flex lg:flex hidden flex-col sm:flex-col md:flex-row lg:flex-row items-center">
               <div>
-                <Link href="https://discord.gg/mooworld">
+                <Link passHref href="https://discord.gg/mooworld">
                   <button className="p-[12px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
                     <FaDiscord size={34} />
                   </button>
                 </Link>
-                <Link href="https://twitter.com/mooworldavax">
+                <Link passHref href="https://twitter.com/mooworldavax">
                   <button className="p-[12px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
                     <FaTwitter size={34} />
                   </button>
@@ -65,13 +66,16 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                 >
                   Shop
                 </button>
-                <Link href="/stake">
+                <Link passHref href="/stake">
                   <button className="p-[16px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 px-10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
                     Stake
                   </button>
                 </Link>
                 {connected && (
-                  <Link href="https://joepegs.com/collections/0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673">
+                  <Link
+                    passHref
+                    href="https://joepegs.com/collections/0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673"
+                  >
                     <button className="p-[16px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 px-10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
                       View Moos
                     </button>
@@ -108,8 +112,8 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                     <div className="mt-6 flex w-full items-center justify-between">
                       <div className="flex items-center justify-between w-full">
                         <div className="flex items-center">
-                          <Link href="/">
-                            <img
+                          <Link passHref href="/">
+                            <Image
                               alt="Moo World"
                               src="./logo.png"
                               className="w-[180px] sm:w-[180px] md:w-[333px] lg:w-[333px] "
@@ -145,7 +149,10 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                         <li className="text-gray-800 pt-10">
                           <div className="flex items-center">
                             {connected && (
-                              <Link href="https://joepegs.com/collections/0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673">
+                              <Link
+                                passHref
+                                href="https://joepegs.com/collections/0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673"
+                              >
                                 <button className="cursor-pointer p-[16px] bg-blue/75 text-white/80 ease-in-out duration-300 hover:text-white/100">
                                   View Moos
                                 </button>
@@ -156,7 +163,7 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                       </a>
                       <li className="text-gray-800 pt-2">
                         <div className="flex items-center">
-                          <Link href="/stake">
+                          <Link passHref href="/stake">
                             <button className="cursor-pointer p-[16px] bg-blue/75 text-white/80 ease-in-out duration-300 hover:text-white/100">
                               Stake
                             </button>

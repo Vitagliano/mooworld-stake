@@ -82,7 +82,7 @@ const MooTag = ({ mooQuantity }) => {
               Learn more about the different perks of each role on our Discord
             </p>
             <div className="flex items-center justify-center">
-              <Link href="https://discord.gg/mooworld">
+              <Link passHref href="https://discord.gg/mooworld">
                 <button className="focus:outline-none bg-burple transition duration-150 ease-in-out hover:bg-burple/90 rounded text-white px-5 py-2 flex items-center justify-center w-full text-sm">
                   Join Discord
                 </button>
