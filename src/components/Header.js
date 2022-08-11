@@ -11,7 +11,7 @@ export default function Header({ connected, signerAddress, connectWallet }) {
   return (
     <header>
       <Container>
-        <div className="pt-10 pb-20 relative z-[99]">
+        <div className="pt-10 pb-5 relative z-[99]">
           <div className="mx-auto max-w-full sm:max-w-full md:max-w-7xl lg:max-w-7xl flex flex-row items-center px-6 sm:px-6 lg:px-0 justify-between">
             <div className="cursor-pointer">
               <a href="/">

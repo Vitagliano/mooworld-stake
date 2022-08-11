@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 const MooTag = ({ mooQuantity }) => {
   const [tooltipStatus, setTooltipStatus] = useState(0);
-
   const roleTooltip = () => {
     return (
       <div

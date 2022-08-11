@@ -18,6 +18,7 @@ export default function NFTCard({
   contract_nft,
 }) {
   const [loading, setLoading] = useState(false);
+  const [kingdom, setIsKingdom] = useState(false);
   const [image, setImage] = useState("");
   const getNftDetail = async () => {
     const uri = await contract_nft?.tokenURI(tokenId);
@@ -29,6 +30,11 @@ export default function NFTCard({
       .then((json) => {
         setImage(json?.image);
       });
+  };
+
+  const checkKingdom = async () => {
+    const isKing = await contract.kingdomOnly();
+    setIsKingdom(isKing);
   };
 
   const onStake = async () => {
@@ -59,6 +65,7 @@ export default function NFTCard({
   };
   useEffect(() => {
     getNftDetail();
+    checkKingdom();
     // eslint-disable-next-line
   }, []);
   return (
@@ -88,12 +95,14 @@ export default function NFTCard({
           }
         >
           <p className="text-xl text-white">Moo #{tokenId}</p>
-          <button
-            className="leading-4 mb-0 py-[10px] px-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
-            onClick={onStake}
-          >
-            STAKE
-          </button>
+          {!kingdom && (
+            <button
+              className="leading-4 mb-0 py-[10px] px-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+              onClick={onStake}
+            >
+              STAKE
+            </button>
+          )}
         </div>
       </div>
     </div>

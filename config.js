@@ -1,6 +1,6 @@
 export const CHAIN_ID = 43113;
 export const StakingContract_Address =
-  "0x85D08A15A750d36dcb7Aa4a03A94e073212cDF56";
+  "0xEd852A5c99C3A7246F1B2dFf4F0551bbe716Fb53";
 export const StakingContract_Address_NFT =
   "0x19D4434173EF5d24BAFB27FC504791f9827CEF71";
 export const SMARTCONTRACT_ADDRESS_ERC20 =
@@ -8,8 +8,9 @@ export const SMARTCONTRACT_ADDRESS_ERC20 =
 export const NETWORK = "Testnet";
 
 export const SITE_ERROR = [
-  "The wrong network, please switch to the Fantom Opera network.",
+  "The wrong network, please switch to the Avalanche network.",
   "You need MetaMask to interact with this site!",
+  "You need 7 or more Moos to stake at this moment.",
 ];
 
 export const SMARCONTRACT_INI_ABI = [
@@ -791,6 +792,25 @@ export const StakingContract_ABI = [
     ],
     name: "tokenStaked",
     type: "event",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "bonus",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [

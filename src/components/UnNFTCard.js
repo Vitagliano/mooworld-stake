@@ -3,7 +3,6 @@ import {
   StakingContract_Address,
   StakingContract_Address_NFT,
 } from "../../config";
-import { ScaleLoader } from "react-spinners";
 import { successAlert } from "./toastGroup";
 import { PageLoading } from "./Loading";
 
@@ -33,17 +32,29 @@ export default function UnNFTCard({
       });
   };
 
-  const getReward = async (stakingid) => {
+  // const getReward = async (stakingId) => {
+  //   const rate = parseFloat(await contract.getRewardRate()) / 10 ** 18;
+  //   const data = await contract.viewStake(stakingId);
+  //   const multiplier = await contract.bonus(data.tokenId);
+  //   const reward = ((multiplier + 100) * rate) / 100;
+  //   setReward(reward);
+  // };
+
+  const getReward = async (stakingId) => {
+    const now = new Date().getTime() / 1000;
     const rate = parseFloat(await contract.getRewardRate()) / 10 ** 18;
-    const data = await contract.viewStake(stakingid);
-    const multiplier = contract.multiplier(data.tokenId);
-    return ((multiplier + 100) * rate) / 100;
+    const data = await contract?.viewStake(stakingId);
+    const multiplier = await contract.bonus(data.tokenId);
+    const reward =
+      (((now - parseFloat(data.releaseTime)) * rate) / (24 * 60 * 60)) *
+      (multiplier + 100);
+    setReward(reward);
   };
 
-  const showReward = () => {
-    getReward();
+  const showReward = (stakingId) => {
+    getReward(stakingId);
     setInterval(() => {
-      getReward();
+      getReward(stakingId);
     }, 10000);
   };
 
@@ -77,7 +88,7 @@ export default function UnNFTCard({
 
   useEffect(() => {
     getNftDetail();
-    showReward();
+    showReward(stakingId);
     // eslint-disable-next-line
   }, []);
   return (
@@ -86,7 +97,7 @@ export default function UnNFTCard({
         <div className="absolute bottom-0 p-2 text-white">
           <p>Moo #{tokenId}</p>
           <p>Reward:</p>
-          <span>{parseFloat(reward).toLocaleString()} MILK</span>
+          <span>{parseFloat(reward).toLocaleString()} $MILK</span>
         </div>
         {loading && (
           <div className="card-loading">

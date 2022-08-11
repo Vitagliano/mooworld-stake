@@ -22,6 +22,7 @@ import { PageLoading } from "../components/Loading";
 import Hero from "../components/Hero";
 import Container from "../components/container";
 import MooTag from "../components/MooTag";
+import Alert from "../components/Alert";
 
 let web3Modal = undefined;
 let contract = undefined;
@@ -31,7 +32,7 @@ let contract_nft = undefined;
 export default function Home() {
   const [connected, setConnected] = useState(false);
   const [signerAddress, setSignerAddress] = useState("");
-  const [nftHolded, setNftHolded] = useState();
+  const [nftHolded, setNftHolded] = useState("");
   const [unstakedNFTs, setUnstakedNFTs] = useState();
   const [stakedNFTs, setStakedNFTs] = useState();
   const [loading, setLoading] = useState(false);
@@ -40,6 +41,8 @@ export default function Home() {
   const [unstakeAllLoading, setUnstakeAllLoading] = useState(false);
   const [claimAllLoading, setClaimAllLoading] = useState(false);
   const [dailyRewardRate, setDailyRewardRate] = useState(0);
+  const [kingdom, setIsKingdom] = useState(false);
+  const [nftBalance, setNftBalance] = useState(0);
 
   const connectWallet = async () => {
     if (await checkNetwork()) {
@@ -74,7 +77,6 @@ export default function Home() {
           SMARTCONTRACT_ABI_ERC20,
           signer
         );
-
         setDailyRewardRate(
           parseFloat(await contract.getRewardRate()) / 10 ** 18
         );
@@ -90,6 +92,11 @@ export default function Home() {
         console.log(error);
       }
     }
+  };
+
+  const checkKingdom = async () => {
+    const isKing = await contract.kingdomOnly();
+    setIsKingdom(isKing);
   };
 
   const updatePage = async (address) => {
@@ -124,15 +131,16 @@ export default function Home() {
 
       for (let i = 0; i < data.length; i++) {
         if (data[i].status === 1) {
-          total++;
-          if (data[i].staker.toLowerCase() === address.toLowerCase()) {
-            staked.push({
-              id: i,
-              tokenId: data[i].tokenId.toNumber(),
-              status: data[i].status,
-              stakingId: data[i].StakingId.toNumber(),
-            });
-          }
+          console.log(i, "pool ID--------------------------");
+          // total++;
+          // if (data[i].staker.toLowerCase() === address.toLowerCase()) {
+          //   unstaked.push({
+          //     id: i,
+          //     tokenId: data[i].tokenId.toNumber(),
+          //     status: data[i].status,
+          //     stakingId: data[i].StakingId.toNumber(),
+          //   });
+          // }
         }
         if (data[i].status === 0) {
           total++;
@@ -149,11 +157,13 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
+    setNftBalance(balance);
     setUnstakedNFTs(unstaked);
     setStakedNFTs(staked);
     setTotalStaked(total);
-    setNftHolded(unstaked.length + staked.length);
+    setNftHolded(staked?.length + unstaked?.length);
     setLoading(false);
+    checkKingdom();
   };
 
   const checkNetwork = async () => {
@@ -169,6 +179,7 @@ export default function Home() {
 
   const onStakeAll = async () => {
     setStakeAllLoading(true);
+
     let unstaked = [];
     for (let item of unstakedNFTs) {
       unstaked.push(item.id);
@@ -178,7 +189,6 @@ export default function Home() {
         signerAddress,
         StakingContract_Address
       );
-      console.log(approved, "approved");
       if (!approved) {
         const approve = await contract_nft.setApprovalForAll(
           StakingContract_Address,
@@ -186,13 +196,18 @@ export default function Home() {
         );
         await approve.wait();
       }
-      const stake = await contract.stakeAll(
-        StakingContract_Address_NFT,
-        unstaked
-      );
-      await stake.wait();
-      successAlert("Staking is successful.");
-      updatePage(signerAddress);
+
+      if (kingdom && nftBalance < 7) {
+        errorAlertCenter(SITE_ERROR[2]);
+      } else {
+        const stake = await contract.stakeAll(
+          StakingContract_Address_NFT,
+          unstaked
+        );
+        await stake.wait();
+        successAlert("Staking is successful.");
+        updatePage(signerAddress);
+      }
     } catch (error) {
       setStakeAllLoading(false);
       console.log(error);
@@ -271,7 +286,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className="pb-20">
         <Header
           signerAddress={signerAddress}
           connectWallet={() => connectWallet()}
@@ -280,6 +295,8 @@ export default function Home() {
         <Hero />
 
         <Container>
+          {kingdom && <Alert />}
+
           {!connected && (
             <div className="flex justify-center items-center w-full mt-4 lg:mt-0 z-50">
               <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-16 xl:pb-8">
@@ -316,7 +333,7 @@ export default function Home() {
                         • Total staked NFT: {totalStaked}
                       </h1>
                     </div>
-                    <MooTag mooQuantity={nftHolded} />
+                    {/* <MooTag mooQuantity={nftHolded} /> */}
                   </div>
                 </div>
               </div>
