@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaDiscord, FaTwitter } from "react-icons/fa";
-import Container from "./container";
+import Container from "./Container";
 export default function Header({ connected, signerAddress, connectWallet }) {
   const [show, setShow] = useState(null);
 

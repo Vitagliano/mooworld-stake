@@ -20,7 +20,7 @@ import { errorAlertCenter, successAlert } from "../components/toastGroup";
 import UnNFTCard from "../components/UnNFTCard";
 import { PageLoading } from "../components/Loading";
 import Hero from "../components/Hero";
-import Container from "../components/container";
+import Container from "../components/Container";
 import MooTag from "../components/MooTag";
 import Alert from "../components/Alert";
 
