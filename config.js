@@ -2,7 +2,7 @@ export const CHAIN_ID = 43114;
 export const StakingContract_Address =
   "0xEd852A5c99C3A7246F1B2dFf4F0551bbe716Fb53";
 export const StakingContract_Address_NFT =
-  "0x694b71763a2d3F16E337AbAFCdEae23af3545D42";
+  "0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673";
 export const SMARTCONTRACT_ADDRESS_ERC20 =
   "0x520a1721b62C3A2e5DDb7d07948E87538C92aa41";
 export const NETWORK = "Testnet";
