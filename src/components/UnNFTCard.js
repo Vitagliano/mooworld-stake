@@ -20,6 +20,7 @@ export default function UnNFTCard({
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState("");
   const [reward, setReward] = useState(0);
+  const [kingdom, setIsKingdom] = useState(false);
   const getNftDetail = async () => {
     let index = 0;
     const owner = signerAddress;
@@ -94,8 +95,13 @@ export default function UnNFTCard({
     setLoading(false);
   };
 
+  const checkKingdom = async () => {
+    const isKing = await contract.kingdomOnly();
+    setIsKingdom(isKing);
+  };
+
   useEffect(() => {
-    console.log("image", image);
+    checkKingdom();
     getNftDetail();
     showReward(stakingId);
     // eslint-disable-next-line
@@ -141,18 +147,22 @@ export default function UnNFTCard({
               : "hidden group-hover:absolute top-0 group-hover:flex items-center w-full h-full justify-center gap-4 flex-col backdrop-blur-xl border-[1px] border-white/10 rounded-xl bg-gradient-to-r from-indigo-300/10 to-blue/80 ease-in-out duration-300"
           }
         >
-          <button
-            className="leading-4 mb-0 py-[10px] px-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
-            onClick={onUnStake}
-          >
-            UNSTAKE
-          </button>
-          <button
-            className="leading-4 mb-0 py-[10px] px-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
-            onClick={onClaim}
-          >
-            CLAIM
-          </button>
+          {!kingdom && (
+            <>
+              <button
+                className="leading-4 mb-0 py-[10px] px-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+                onClick={onUnStake}
+              >
+                UNSTAKE
+              </button>
+              <button
+                className="leading-4 mb-0 py-[10px] px-[16px] flex justify-center items-center backdrop-blur-lg rounded-xl border-[1px] border-white/10  bg-blue/75 text-white ease-in-out hover:bg-blue hover:border-white duration-300"
+                onClick={onClaim}
+              >
+                CLAIM
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

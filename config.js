@@ -1732,565 +1732,565 @@ export const SMARCONTRACT_INI_ABI = [
 
 export const StakingContract_ABI = [
   {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor",
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "token",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "token_id",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "token_id",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        internalType: "enum MooStake.StakingStatus",
-        name: "status",
-        type: "uint8",
+        "indexed": true,
+        "internalType": "enum MooStake.StakingStatus",
+        "name": "status",
+        "type": "uint8"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "StakingId",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "StakingId",
+        "type": "uint256"
+      }
     ],
-    name: "tokenCancelComplete",
-    type: "event",
+    "name": "tokenCancelComplete",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "token",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "token_id",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "token_id",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        internalType: "enum MooStake.StakingStatus",
-        name: "status",
-        type: "uint8",
+        "indexed": true,
+        "internalType": "enum MooStake.StakingStatus",
+        "name": "status",
+        "type": "uint8"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "StakingId",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "StakingId",
+        "type": "uint256"
+      }
     ],
-    name: "tokenClaimComplete",
-    type: "event",
+    "name": "tokenClaimComplete",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "token",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "token_id",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "token_id",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        internalType: "enum MooStake.StakingStatus",
-        name: "status",
-        type: "uint8",
+        "indexed": true,
+        "internalType": "enum MooStake.StakingStatus",
+        "name": "status",
+        "type": "uint8"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "StakingId",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "StakingId",
+        "type": "uint256"
+      }
     ],
-    name: "tokenClaimStatus",
-    type: "event",
+    "name": "tokenClaimStatus",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "staker",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "staker",
+        "type": "address"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "token",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "token_id",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "token_id",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "enum MooStake.StakingStatus",
-        name: "status",
-        type: "uint8",
+        "indexed": false,
+        "internalType": "enum MooStake.StakingStatus",
+        "name": "status",
+        "type": "uint8"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "StakingId",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "StakingId",
+        "type": "uint256"
+      }
     ],
-    name: "tokenStaked",
-    type: "event",
+    "name": "tokenStaked",
+    "type": "event"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "bonus",
-    outputs: [
+    "name": "bonus",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "_tokenID",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_tokenID",
+        "type": "uint256"
+      }
     ],
-    name: "callStakeToken",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "callStakeToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "stakingId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "stakingId",
+        "type": "uint256"
+      }
     ],
-    name: "cancelStake",
-    outputs: [
+    "name": "cancelStake",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "address",
-            name: "staker",
-            type: "address",
+            "internalType": "address",
+            "name": "staker",
+            "type": "address"
           },
           {
-            internalType: "address",
-            name: "token",
-            type: "address",
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "tokenId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "emission",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "emission",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "releaseTime",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "releaseTime",
+            "type": "uint256"
           },
           {
-            internalType: "enum MooStake.StakingStatus",
-            name: "status",
-            type: "uint8",
+            "internalType": "enum MooStake.StakingStatus",
+            "name": "status",
+            "type": "uint8"
           },
           {
-            internalType: "uint256",
-            name: "StakingId",
-            type: "uint256",
-          },
+            "internalType": "uint256",
+            "name": "StakingId",
+            "type": "uint256"
+          }
         ],
-        internalType: "struct MooStake.Staking",
-        name: "",
-        type: "tuple",
-      },
+        "internalType": "struct MooStake.Staking",
+        "name": "",
+        "type": "tuple"
+      }
     ],
-    stateMutability: "nonpayable",
-    type: "function",
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "bool",
-        name: "_state",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "_state",
+        "type": "bool"
+      }
     ],
-    name: "changeMooKingdom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "changeMooKingdom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256[]",
-        name: "stakingId",
-        type: "uint256[]",
-      },
+        "internalType": "uint256[]",
+        "name": "stakingId",
+        "type": "uint256[]"
+      }
     ],
-    name: "claimAll",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "claimAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "stakingId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "stakingId",
+        "type": "uint256"
+      }
     ],
-    name: "claimStake",
-    outputs: [
+    "name": "claimStake",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "address",
-            name: "staker",
-            type: "address",
+            "internalType": "address",
+            "name": "staker",
+            "type": "address"
           },
           {
-            internalType: "address",
-            name: "token",
-            type: "address",
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "tokenId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "emission",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "emission",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "releaseTime",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "releaseTime",
+            "type": "uint256"
           },
           {
-            internalType: "enum MooStake.StakingStatus",
-            name: "status",
-            type: "uint8",
+            "internalType": "enum MooStake.StakingStatus",
+            "name": "status",
+            "type": "uint8"
           },
           {
-            internalType: "uint256",
-            name: "StakingId",
-            type: "uint256",
-          },
+            "internalType": "uint256",
+            "name": "StakingId",
+            "type": "uint256"
+          }
         ],
-        internalType: "struct MooStake.Staking",
-        name: "",
-        type: "tuple",
-      },
+        "internalType": "struct MooStake.Staking",
+        "name": "",
+        "type": "tuple"
+      }
     ],
-    stateMutability: "nonpayable",
-    type: "function",
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "endDate",
-    outputs: [
+    "inputs": [],
+    "name": "endDate",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "endStaking",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "inputs": [],
+    "name": "endStaking",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getRewardRate",
-    outputs: [
+    "inputs": [],
+    "name": "getRewardRate",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "getTotalStaked",
-    outputs: [
+    "inputs": [],
+    "name": "getTotalStaked",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "initStaking",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "inputs": [],
+    "name": "initStaking",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "kingdomOnly",
-    outputs: [
+    "inputs": [],
+    "name": "kingdomOnly",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "numberOfMinutes",
-    outputs: [
+    "inputs": [],
+    "name": "numberOfMinutes",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256[]",
-        name: "tokenId",
-        type: "uint256[]",
+        "internalType": "uint256[]",
+        "name": "tokenId",
+        "type": "uint256[]"
       },
       {
-        internalType: "uint256[]",
-        name: "x",
-        type: "uint256[]",
-      },
+        "internalType": "uint256[]",
+        "name": "x",
+        "type": "uint256[]"
+      }
     ],
-    name: "setBonus",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setBonus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      }
     ],
-    name: "setNFTToken",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setNFTToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "newAdd",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "newAdd",
+        "type": "address"
+      }
     ],
-    name: "setNewAdmin",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setNewAdmin",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_numberOfMinutes",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_numberOfMinutes",
+        "type": "uint256"
+      }
     ],
-    name: "setNumberOfMinutes",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setNumberOfMinutes",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "newRate",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "newRate",
+        "type": "uint256"
+      }
     ],
-    name: "setRewardRate",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setRewardRate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      }
     ],
-    name: "setRewardToken",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "setRewardToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
-        internalType: "uint256[]",
-        name: "tokenId",
-        type: "uint256[]",
-      },
+        "internalType": "uint256[]",
+        "name": "tokenId",
+        "type": "uint256[]"
+      }
     ],
-    name: "stakeAll",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "stakeAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "stakingStartTime",
-    outputs: [
+    "inputs": [],
+    "name": "stakingStartTime",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "stakingId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "stakingId",
+        "type": "uint256"
+      }
     ],
-    name: "viewStake",
-    outputs: [
+    "name": "viewStake",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "address",
-            name: "staker",
-            type: "address",
+            "internalType": "address",
+            "name": "staker",
+            "type": "address"
           },
           {
-            internalType: "address",
-            name: "token",
-            type: "address",
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "tokenId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "emission",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "emission",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "releaseTime",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "releaseTime",
+            "type": "uint256"
           },
           {
-            internalType: "enum MooStake.StakingStatus",
-            name: "status",
-            type: "uint8",
+            "internalType": "enum MooStake.StakingStatus",
+            "name": "status",
+            "type": "uint8"
           },
           {
-            internalType: "uint256",
-            name: "StakingId",
-            type: "uint256",
-          },
+            "internalType": "uint256",
+            "name": "StakingId",
+            "type": "uint256"
+          }
         ],
-        internalType: "struct MooStake.Staking",
-        name: "",
-        type: "tuple",
-      },
+        "internalType": "struct MooStake.Staking",
+        "name": "",
+        "type": "tuple"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-];
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
 
 export const SMARTCONTRACT_ABI_ERC20 = [
   {
