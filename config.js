@@ -5,7 +5,7 @@ export const StakingContract_Address_NFT =
   "0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673";
 export const SMARTCONTRACT_ADDRESS_ERC20 =
   "0x520a1721b62C3A2e5DDb7d07948E87538C92aa41";
-export const NETWORK = "Testnet";
+export const NETWORK = "Avax";
 
 export const SITE_ERROR = [
   "The wrong network, please switch to the Avalanche network.",

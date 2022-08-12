@@ -56,7 +56,6 @@ export default function Home() {
         const web3Provider = new providers.Web3Provider(provider);
         const signer = web3Provider.getSigner();
         const address = await signer.getAddress();
-
         setConnected(true);
         setSignerAddress(address);
 
@@ -103,21 +102,23 @@ export default function Home() {
     setLoading(true);
     let unstaked = [];
     let staked = [];
-    const balance = await contract_nft.balanceOf(address);
+    const balance = parseFloat(await contract_nft.balanceOf(address));
+    const totalMinted = parseFloat(await contract_nft.totalSupply());
     const totalSupply = await contract.getTotalStaked();
     let total = 0;
     try {
       let promise_index = [];
       let index = 0;
       const owner = address;
-      for (let i = 0; i < 2000; i++) {
-        const token = await contract_nft.ownerOf(index);
-        if (token === owner) {
+      for (let i = 0; i < totalMinted; i++) {
+        const token = await contract_nft.ownerOf(Number(i));
+        if (token.toLowerCase() === owner.toLowerCase()) {
           promise_index.push(Number(i));
           index++;
         }
       }
       const indexData = await Promise.all(promise_index);
+      console.log(indexData, "indexData");
       for (let i = 0; i < indexData.length; i++) {
         unstaked.push({
           id: parseInt(indexData[i]),

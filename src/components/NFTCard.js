@@ -26,7 +26,7 @@ export default function NFTCard({
     const owner = signerAddress;
     for (let i = 0; i < 2000; i++) {
       const token = await contract_nft.ownerOf(index);
-      if (token === owner) {
+      if (token.toLowerCase() === owner.toLowerCase()) {
         const uri = await contract_nft?.tokenURI(tokenId);
         await fetch(uri)
           .then((resp) => resp.json())
