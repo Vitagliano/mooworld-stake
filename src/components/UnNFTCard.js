@@ -88,6 +88,7 @@ export default function UnNFTCard({
   };
 
   useEffect(() => {
+    console.log("image", image);
     getNftDetail();
     showReward(stakingId);
     // eslint-disable-next-line
@@ -107,11 +108,20 @@ export default function UnNFTCard({
         )}
         <div className="media">
           {image === "" ? (
-            <span className="empty-image empty-image-skeleton"></span>
+            <img
+              className="rounded-xl"
+              src="https://ipfs.io/ipfs/bafybeicsxlgdsvw7xeni4wavifengbdhonwihdxhwsm5n4kmwodyw7ls3m/moo-world-unrevealed.gif"
+              alt="moo"
+            />
           ) : (
             // eslint-disable-next-line
             <img
-              src={image.replace("ipfs://", "https://ipfs.io/ipfs/")}
+              src={
+                image
+                  ? image.replace("ipfs://", "https://ipfs.io/ipfs/")
+                  : // ? image.replace("ipfs://", "https://ipfs.io/ipfs/")
+                    "https://ipfs.io/ipfs/bafybeicsxlgdsvw7xeni4wavifengbdhonwihdxhwsm5n4kmwodyw7ls3m/moo-world-unrevealed.gif"
+              }
               alt={tokenId}
               className="rounded-xl"
               style={{ opacity: loading ? 0 : 1 }}

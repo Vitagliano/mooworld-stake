@@ -97,7 +97,6 @@ const MooTag = ({ mooQuantity }) => {
   };
 
   const roleFilter = (mooQuantity) => {
-    console.log("mooQuantity", mooQuantity);
     if ((mooQuantity = 1 && mooQuantity <= 2)) {
       return "mooFren";
     }

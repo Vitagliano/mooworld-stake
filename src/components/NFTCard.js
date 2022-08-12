@@ -20,16 +20,40 @@ export default function NFTCard({
   const [loading, setLoading] = useState(false);
   const [kingdom, setIsKingdom] = useState(false);
   const [image, setImage] = useState("");
+  const [ownerTokens, setOwnerTokens] = useState([]);
+
+  const getUserMoosTokens = async () => {
+    const tokens = [];
+    let index = 0;
+    const owner = signerAddress;
+    const token = await contract_nft.ownerOf(index);
+
+    for (let i = 0; i < 2000; i++) {
+      if (token === owner) {
+        tokens.push(Number(i));
+        console.log("é igual", tokens);
+        index++;
+      }
+    }
+  };
+
   const getNftDetail = async () => {
-    const uri = await contract_nft?.tokenURI(tokenId);
-    await fetch(uri)
-      .then((resp) => resp.json())
-      .catch((e) => {
-        console.log(e);
-      })
-      .then((json) => {
-        setImage(json?.image);
-      });
+    let index = 0;
+    const owner = signerAddress;
+    for (let i = 0; i < 2000; i++) {
+      const token = await contract_nft.ownerOf(index);
+      if (token === owner) {
+        const uri = await contract_nft?.tokenURI(tokenId);
+        await fetch(uri)
+          .then((resp) => resp.json())
+          .catch((e) => {
+            console.log(e);
+          })
+          .then((json) => {
+            setImage(json.image);
+          });
+      }
+    }
   };
 
   const checkKingdom = async () => {
@@ -64,6 +88,7 @@ export default function NFTCard({
     setLoading(false);
   };
   useEffect(() => {
+    getUserMoosTokens();
     getNftDetail();
     checkKingdom();
     // eslint-disable-next-line
@@ -76,12 +101,21 @@ export default function NFTCard({
             <PageLoading status={loading} />
           </div>
         )}
+
         {image === "" ? (
-          <span className="empty-image empty-image-skeleton"></span>
+          <img
+            className="rounded-xl"
+            src="https://ipfs.io/ipfs/bafybeicsxlgdsvw7xeni4wavifengbdhonwihdxhwsm5n4kmwodyw7ls3m/moo-world-unrevealed.gif"
+            alt="moo"
+          />
         ) : (
           // eslint-disable-next-line
           <img
-            src={image.replace("ipfs://", "https://ipfs.io/ipfs/")}
+            src={
+              image
+                ? image.replace("ipfs://", "https://ipfs.io/ipfs/")
+                : "https://ipfs.io/ipfs/bafybeicsxlgdsvw7xeni4wavifengbdhonwihdxhwsm5n4kmwodyw7ls3m/moo-world-unrevealed.gif"
+            }
             alt={tokenId}
             className="rounded-xl"
             style={{ opacity: loading ? 0 : 1 }}
