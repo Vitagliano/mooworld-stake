@@ -66,16 +66,13 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                 >
                   Shop
                 </button>
-                <Link passHref href="/stake">
+                <Link passHref href="https://stake.mooworld.io">
                   <button className="p-[16px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 px-10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
                     Stake
                   </button>
                 </Link>
                 {connected && (
-                  <Link
-                    passHref
-                    href="https://joepegs.com/collections/0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673"
-                  >
+                  <Link passHref href="/moos">
                     <button className="p-[16px] mr-4 backdrop-blur-lg rounded-xl border-[1px] border-white/10 px-10 bg-blue/75 text-white ease-in-out  hover:bg-blue hover:border-white duration-300">
                       View Moos
                     </button>
@@ -149,10 +146,7 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                         <li className="text-gray-800 pt-10">
                           <div className="flex items-center">
                             {connected && (
-                              <Link
-                                passHref
-                                href="https://joepegs.com/collections/0xcFd8402927f07A4D1e4DFe7f9C60f6EbF9Ed3673"
-                              >
+                              <Link passHref href="/moos">
                                 <button className="cursor-pointer p-[16px] bg-blue/75 text-white/80 ease-in-out duration-300 hover:text-white/100">
                                   View Moos
                                 </button>
@@ -163,7 +157,7 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                       </a>
                       <li className="text-gray-800 pt-2">
                         <div className="flex items-center">
-                          <Link passHref href="/stake">
+                          <Link passHref href="https://stake.moooworld.io">
                             <button className="cursor-pointer p-[16px] bg-blue/75 text-white/80 ease-in-out duration-300 hover:text-white/100">
                               Stake
                             </button>
