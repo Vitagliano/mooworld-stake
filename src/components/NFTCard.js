@@ -20,22 +20,6 @@ export default function NFTCard({
   const [loading, setLoading] = useState(false);
   const [kingdom, setIsKingdom] = useState(false);
   const [image, setImage] = useState("");
-  const [ownerTokens, setOwnerTokens] = useState([]);
-
-  const getUserMoosTokens = async () => {
-    const tokens = [];
-    let index = 0;
-    const owner = signerAddress;
-    const token = await contract_nft.ownerOf(index);
-
-    for (let i = 0; i < 2000; i++) {
-      if (token === owner) {
-        tokens.push(Number(i));
-        console.log("é igual", tokens);
-        index++;
-      }
-    }
-  };
 
   const getNftDetail = async () => {
     let index = 0;
@@ -88,7 +72,6 @@ export default function NFTCard({
     setLoading(false);
   };
   useEffect(() => {
-    getUserMoosTokens();
     getNftDetail();
     checkKingdom();
     // eslint-disable-next-line

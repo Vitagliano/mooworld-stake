@@ -21,15 +21,22 @@ export default function UnNFTCard({
   const [image, setImage] = useState("");
   const [reward, setReward] = useState(0);
   const getNftDetail = async () => {
-    const uri = await contract_nft?.tokenURI(tokenId);
-    await fetch(uri)
-      .then((resp) => resp.json())
-      .catch((e) => {
-        console.log(e);
-      })
-      .then((json) => {
-        setImage(json?.image);
-      });
+    let index = 0;
+    const owner = signerAddress;
+    for (let i = 0; i < 2000; i++) {
+      const token = await contract_nft.ownerOf(index);
+      if (token === owner) {
+        const uri = await contract_nft?.tokenURI(tokenId);
+        await fetch(uri)
+          .then((resp) => resp.json())
+          .catch((e) => {
+            console.log(e);
+          })
+          .then((json) => {
+            setImage(json.image);
+          });
+      }
+    }
   };
 
   // const getReward = async (stakingId) => {
@@ -119,8 +126,7 @@ export default function UnNFTCard({
               src={
                 image
                   ? image.replace("ipfs://", "https://ipfs.io/ipfs/")
-                  : // ? image.replace("ipfs://", "https://ipfs.io/ipfs/")
-                    "https://ipfs.io/ipfs/bafybeicsxlgdsvw7xeni4wavifengbdhonwihdxhwsm5n4kmwodyw7ls3m/moo-world-unrevealed.gif"
+                  : "https://ipfs.io/ipfs/bafybeicsxlgdsvw7xeni4wavifengbdhonwihdxhwsm5n4kmwodyw7ls3m/moo-world-unrevealed.gif"
               }
               alt={tokenId}
               className="rounded-xl"
