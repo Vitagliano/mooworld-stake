@@ -44,10 +44,11 @@ export default function UnNFTCard({
     const now = new Date().getTime() / 1000;
     const rate = parseFloat(await contract.getRewardRate()) / 10 ** 18;
     const data = await contract?.viewStake(stakingId);
-    const multiplier = await contract.bonus(data.tokenId);
+    const multiplier = parseFloat(await contract.bonus(data.tokenId));
     const reward =
-      (((now - parseFloat(data.releaseTime)) * rate) / (24 * 60 * 60)) *
-      (multiplier + 100);
+      ((((now - parseFloat(data.releaseTime)) * (multiplier + 100)) / 100) *
+        rate) /
+      (24 * 60 * 60);
     setReward(reward);
   };
 
@@ -94,7 +95,7 @@ export default function UnNFTCard({
   return (
     <div className="w-full">
       <div className="relative group">
-        <div className="absolute bottom-0 p-2 text-white">
+        <div className="absolute bottom-0 m-1 rounded-lg p-1 text-white bg-blue/50">
           <p>Moo #{tokenId}</p>
           <p>Reward:</p>
           <span>{parseFloat(reward).toLocaleString()} $MILK</span>

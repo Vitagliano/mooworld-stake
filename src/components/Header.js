@@ -16,7 +16,7 @@ export default function Header({ connected, signerAddress, connectWallet }) {
           <div className="mx-auto max-w-full sm:max-w-full md:max-w-7xl lg:max-w-7xl flex flex-row items-center px-6 sm:px-6 lg:px-0 justify-between">
             <div className="cursor-pointer">
               <Link passHref href="/">
-                <Image alt="Moo World" src="./logo.png" className="w-[222px]" />
+                <img alt="Moo World" src="./logo.png" className="w-[222px]" />
               </Link>
             </div>
             {show ? (
@@ -113,9 +113,9 @@ export default function Header({ connected, signerAddress, connectWallet }) {
                       <div className="flex items-center justify-between w-full">
                         <div className="flex items-center">
                           <Link passHref href="/">
-                            <Image
+                            <img
                               alt="Moo World"
-                              src="./logo.png"
+                              src="/logo.png"
                               className="w-[180px] sm:w-[180px] md:w-[333px] lg:w-[333px] "
                             />
                           </Link>

@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 const MooTag = ({ mooQuantity }) => {
   const [tooltipStatus, setTooltipStatus] = useState(0);
+  const [mooImage, setMooImage] = useState("");
+  const [mooName, setMooName] = useState("");
   const roleTooltip = () => {
     return (
       <div
@@ -94,14 +96,15 @@ const MooTag = ({ mooQuantity }) => {
     );
   };
 
-  const roleFilter = () => {
-    if (mooQuantity === 1 && mooQuantity <= 2) {
+  const roleFilter = (mooQuantity) => {
+    console.log("mooQuantity", mooQuantity);
+    if ((mooQuantity = 1 && mooQuantity <= 2)) {
       return "mooFren";
     }
-    if (mooQuantity === 3 && mooQuantity <= 4) {
+    if ((mooQuantity = 3 && mooQuantity <= 4)) {
       return "mooProtector";
     }
-    if (mooQuantity === 5 && mooQuantity <= 6) {
+    if ((mooQuantity = 5 && mooQuantity <= 6)) {
       return "mooSanctuary";
     }
     if (mooQuantity >= 7) {
@@ -109,7 +112,7 @@ const MooTag = ({ mooQuantity }) => {
     }
   };
 
-  const role = roleFilter();
+  const role = roleFilter(mooQuantity);
 
   const mooRoles = {
     mooFren: {
@@ -130,14 +133,13 @@ const MooTag = ({ mooQuantity }) => {
     },
   };
 
-  if (mooQuantity > 0) {
+  if (mooQuantity && mooQuantity > 0) {
     return (
       <span className="px-5 py-3 flex items-center gap-2 justify-center backdrop-blur-full rounded-full border-[1px] border-white/10 bg-blue/75 text-white">
-        <Image
-          src={mooRoles[role].image}
+        <img
+          src={mooRoles[role].image.src}
           alt={mooRoles[role].name}
-          width={24}
-          height={24}
+          className="w-[24px] h-[24px]"
         />
         {mooRoles[role].name}
         {roleTooltip()}

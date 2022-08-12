@@ -131,7 +131,6 @@ export default function Home() {
 
       for (let i = 0; i < data.length; i++) {
         if (data[i].status === 1) {
-          console.log(i, "pool ID--------------------------");
           // total++;
           // if (data[i].staker.toLowerCase() === address.toLowerCase()) {
           //   unstaked.push({
@@ -333,7 +332,7 @@ export default function Home() {
                         • Total staked NFT: {totalStaked}
                       </h1>
                     </div>
-                    {/* <MooTag mooQuantity={nftHolded} /> */}
+                    <MooTag mooQuantity={nftHolded} />
                   </div>
                 </div>
               </div>
