@@ -325,7 +325,7 @@ export default function Home() {
 
           {connected && (
             <>
-              <div className="flex justify-center items-center w-full lg:mt-0 mb-10 z-50">
+              <div className="flex px-4 justify-center items-center w-full lg:mt-0 mb-10 z-50">
                 <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-12 xl:pb-8">
                   <div className="flex items-center justify-between">
                     <div className="flex flex-col">
@@ -344,8 +344,8 @@ export default function Home() {
               </div>
 
               {/* <div className="grid overflow-hidden lg grid-cols-2 grid-rows-1 gap-1 grid-flow-row relative z-50"> */}
-              <div className="flex items-center justify-center w-full relative z-50">
-                <div className="flex gap-6 md:w-11/12 xl:w-10/12 ">
+              <div className="flex  px-4 items-center justify-center w-full relative z-50">
+                <div className="flex flex-col sm:flex-row gap-6 md:w-11/12 xl:w-10/12 ">
                   {/* <div className="box row-start-1 row-end-1 col-start-1 col-end-1"> */}
                   <div className="w-full backdrop-blur-lg border-[1px] border-white/10 rounded-xl md:w-11/12 xl:w-10/12 bg-gradient-to-r from-indigo-300/10 to-blue/10 md:py-8 md:px-8 px-5 py-4 xl:px-12 xl:py-12 xl:pb-8">
                     <div className="flex flex-row justify-between items-center">
