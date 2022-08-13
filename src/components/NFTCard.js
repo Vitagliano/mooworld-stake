@@ -9,6 +9,7 @@ import { PageLoading } from "./Loading";
 
 export default function NFTCard({
   id,
+  item,
   nftName,
   status,
   tokenId,
@@ -20,24 +21,18 @@ export default function NFTCard({
   const [loading, setLoading] = useState(false);
   const [kingdom, setIsKingdom] = useState(false);
   const [image, setImage] = useState("");
-
-  const getNftDetail = async () => {
-    let index = 0;
-    const owner = signerAddress;
-    for (let i = 0; i < 2000; i++) {
-      const token = await contract_nft.ownerOf(index);
-      if (token.toLowerCase() === owner.toLowerCase()) {
-        const uri = await contract_nft?.tokenURI(tokenId);
-        await fetch(uri)
-          .then((resp) => resp.json())
-          .catch((e) => {
-            console.log(e);
-          })
-          .then((json) => {
-            setImage(json.image);
-          });
-      }
-    }
+  console.log(item, "item");
+  const getNftDetail = async (req, res) => {
+    const uri = await contract_nft?.tokenURI(tokenId);
+    await fetch(uri.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"))
+      .then((resp) => resp.json())
+      .catch((e) => {
+        console.log(e);
+      })
+      .then((resp) => {
+        // console.log("json", resp.image);
+        setImage(resp?.image);
+      });
   };
 
   const checkKingdom = async () => {
@@ -72,7 +67,7 @@ export default function NFTCard({
     setLoading(false);
   };
   useEffect(() => {
-    getNftDetail();
+    console.log("getNftDetail", getNftDetail());
     checkKingdom();
     // eslint-disable-next-line
   }, []);
@@ -96,7 +91,7 @@ export default function NFTCard({
           <img
             src={
               image
-                ? image.replace("ipfs://", "https://ipfs.io/ipfs/")
+                ? image.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/")
                 : "https://ipfs.io/ipfs/bafybeicsxlgdsvw7xeni4wavifengbdhonwihdxhwsm5n4kmwodyw7ls3m/moo-world-unrevealed.gif"
             }
             alt={tokenId}

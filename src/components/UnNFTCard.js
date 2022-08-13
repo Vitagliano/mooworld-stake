@@ -21,32 +21,17 @@ export default function UnNFTCard({
   const [image, setImage] = useState("");
   const [reward, setReward] = useState(0);
   const [kingdom, setIsKingdom] = useState(false);
-  const getNftDetail = async () => {
-    let index = 0;
-    const owner = signerAddress;
-    for (let i = 0; i < 2000; i++) {
-      const token = await contract_nft.ownerOf(index);
-      if (token === owner) {
-        const uri = await contract_nft?.tokenURI(tokenId);
-        await fetch(uri)
-          .then((resp) => resp.json())
-          .catch((e) => {
-            console.log(e);
-          })
-          .then((json) => {
-            setImage(json.image);
-          });
-      }
-    }
+  const getNftDetail = async (req, res) => {
+    const uri = await contract_nft?.tokenURI(tokenId);
+    await fetch(uri.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"))
+      .then((resp) => resp.json())
+      .catch((e) => {
+        console.log(e);
+      })
+      .then((resp) => {
+        setImage(resp?.image);
+      });
   };
-
-  // const getReward = async (stakingId) => {
-  //   const rate = parseFloat(await contract.getRewardRate()) / 10 ** 18;
-  //   const data = await contract.viewStake(stakingId);
-  //   const multiplier = await contract.bonus(data.tokenId);
-  //   const reward = ((multiplier + 100) * rate) / 100;
-  //   setReward(reward);
-  // };
 
   const getReward = async (stakingId) => {
     const now = new Date().getTime() / 1000;
@@ -131,7 +116,7 @@ export default function UnNFTCard({
             <img
               src={
                 image
-                  ? image.replace("ipfs://", "https://ipfs.io/ipfs/")
+                  ? image.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/")
                   : "https://ipfs.io/ipfs/bafybeicsxlgdsvw7xeni4wavifengbdhonwihdxhwsm5n4kmwodyw7ls3m/moo-world-unrevealed.gif"
               }
               alt={tokenId}

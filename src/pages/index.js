@@ -118,7 +118,6 @@ export default function Home() {
         }
       }
       const indexData = await Promise.all(promise_index);
-      console.log(indexData, "indexData");
       for (let i = 0; i < indexData.length; i++) {
         unstaked.push({
           id: parseInt(indexData[i]),
@@ -382,6 +381,7 @@ export default function Home() {
                         unstakedNFTs.map((item, key) => (
                           <NFTCard
                             id={item.id}
+                            item={item}
                             key={key}
                             status={item.status}
                             tokenId={item.tokenId}
@@ -402,6 +402,7 @@ export default function Home() {
                         Staked NFT (
                         {stakedNFTs?.length && `${stakedNFTs?.length}`})
                       </h4>
+                      {stakedNFTs?.length != 0 && (
                       <div className="flex flex-row gap-4">
                         <button
                           className={
@@ -438,6 +439,7 @@ export default function Home() {
                           )}
                         </button>
                       </div>
+                      )}
                     </div>
 
                     <div className="mt-4 grid overflow-hidden grid-cols-3 grid-rows-1 gap-6 grid-flow-row">
