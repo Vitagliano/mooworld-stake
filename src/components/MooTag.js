@@ -97,16 +97,20 @@ const MooTag = ({ mooQuantity }) => {
   };
 
   const roleFilter = (mooQuantity) => {
-    if ((mooQuantity = 1 && mooQuantity <= 2)) {
+    if (mooQuantity === 1 || mooQuantity <= 2) {
+      console.log("mooFren");
       return "mooFren";
     }
-    if ((mooQuantity = 3 && mooQuantity <= 4)) {
+    if (mooQuantity === 3 || mooQuantity <= 4) {
+      console.log("mooProtector");
       return "mooProtector";
     }
-    if ((mooQuantity = 5 && mooQuantity <= 6)) {
+    if (mooQuantity === 5 || mooQuantity <= 6) {
+      console.log("mooSanctuary");
       return "mooSanctuary";
     }
     if (mooQuantity >= 7) {
+      console.log("mooKingdom");
       return "mooKingdom";
     }
   };

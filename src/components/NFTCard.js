@@ -21,7 +21,6 @@ export default function NFTCard({
   const [loading, setLoading] = useState(false);
   const [kingdom, setIsKingdom] = useState(false);
   const [image, setImage] = useState("");
-  console.log(item, "item");
   const getNftDetail = async (req, res) => {
     const uri = await contract_nft?.tokenURI(tokenId);
     await fetch(uri.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"))
@@ -30,7 +29,6 @@ export default function NFTCard({
         console.log(e);
       })
       .then((resp) => {
-        // console.log("json", resp.image);
         setImage(resp?.image);
       });
   };
@@ -67,7 +65,7 @@ export default function NFTCard({
     setLoading(false);
   };
   useEffect(() => {
-    console.log("getNftDetail", getNftDetail());
+    getNftDetail();
     checkKingdom();
     // eslint-disable-next-line
   }, []);
